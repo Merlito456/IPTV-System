@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Channel (Static)</title>
+  <style> /* basic styling */ body{font-family:sans-serif;background:#f7f7f7;padding:20px;} .card{background:#fff;padding:20px;border-radius:6px;max-width:500px;margin:auto;box-shadow:0 2px 6px rgba(0,0,0,0.1);} input, select{width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:4px;} button{padding:10px 20px;background:#007bff;color:#fff;border:none;border-radius:4px;cursor:pointer;} button:hover{background:#0056b3;}</style>
+</head>
+<body>
+  <div class="card">
+    <h2>Add New Channel</h2>
+    <form id="form">
+      <label>Name: <input name="name" required></label>
+      <label>Type:
+        <select name="type">
+          <option value="iptv">IPTV (m3u8)</option>
+          <option value="youtube">YouTube Live (channel ID)</option>
+        </select>
+      </label>
+      <label>Link / Channel ID: <input name="link" required></label>
+      <button type="submit">Add Channel</button>
+    </form>
+    <p><a href="index.html">← Back to Player</a></p>
+  </div>
+
+  <script>
+    document.getElementById('form').onsubmit = e => {
+      e.preventDefault();
+      const nm = e.target.name.value.trim(), tp = e.target.type.value, ln = e.target.link.value.trim();
+      fetch('channels.json')
+        .then(r=>r.json())
+        .then(d=>{
+          const arr = tp==='iptv'? d.iptv : d.youtube;
+          arr.push(tp to
