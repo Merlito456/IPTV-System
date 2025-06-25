@@ -100,10 +100,12 @@
         video.style.display = 'block';
         const player = dashjs.MediaPlayer().create();
         player.initialize(video, link, true);
-        player.on('error', e => error.textContent = "❌ Stream error");
         player.on('playbackPlaying', () => {
           result.textContent = '✅ Stream working!';
           submitBtn.disabled = false;
+        });
+        player.on('error', e => {
+          error.textContent = "❌ Stream error";
         });
       } else if (type === 'youtube') {
         ytContainer.style.display = 'block';
@@ -119,6 +121,8 @@
       const link = document.getElementById('channelLink').value.trim();
 
       let payload = { name, type };
+
+      // Correct field assignment
       if (type === 'youtube') {
         payload.youtube_channel_id = link;
       } else {
