@@ -116,17 +116,27 @@
       const name = document.getElementById('channelName').value.trim();
       const link = document.getElementById('channelLink').value.trim();
 
-      const data = localStorage.getItem('iptv_static_channels') || '[]';
-      const channels = JSON.parse(data);
-
-      channels.push({ name, type, link });
-      localStorage.setItem('iptv_static_channels', JSON.stringify(channels));
-
-      alert("Channel saved locally!");
-      document.getElementById('channelName').value = '';
-      document.getElementById('channelLink').value = '';
-      submitBtn.disabled = true;
-      document.getElementById('result').textContent = '';
+      fetch('http://vipstreaming.zya.me/save_channel.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, type, link })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          alert('✅ Channel saved successfully!');
+          document.getElementById('channelName').value = '';
+          document.getElementById('channelLink').value = '';
+          document.getElementById('result').textContent = '';
+          submitBtn.disabled = true;
+        } else {
+          alert('❌ Error: ' + (data.error || 'Unknown error'));
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('❌ Network or server error');
+      });
     });
   </script>
 </body>
