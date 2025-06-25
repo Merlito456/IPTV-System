@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Static IPTV Player</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>📺 IPTV Player</h1>
+
+  <div class="form-container">
+    <input type="text" id="channelName" placeholder="Channel name">
+    <input type="text" id="channelUrl" placeholder="HLS (.m3u8) URL">
+    <button onclick="addChannel()">➕ Add Channel</button>
+  </div>
+
+  <div class="channel-list" id="channelList"></div>
+
+  <div class="video-container">
+    <video id="video" controls autoplay></video>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="player.js"></script>
+</body>
+</html>
