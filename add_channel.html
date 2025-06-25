@@ -1,33 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Add Channel (Static)</title>
-  <style> /* basic styling */ body{font-family:sans-serif;background:#f7f7f7;padding:20px;} .card{background:#fff;padding:20px;border-radius:6px;max-width:500px;margin:auto;box-shadow:0 2px 6px rgba(0,0,0,0.1);} input, select{width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:4px;} button{padding:10px 20px;background:#007bff;color:#fff;border:none;border-radius:4px;cursor:pointer;} button:hover{background:#0056b3;}</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Channel - Admin Only</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    #login, #form-container {
+      max-width: 400px;
+      margin: 50px auto;
+      background: #222;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    input, button, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .error {
+      color: red;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
-  <div class="card">
-    <h2>Add New Channel</h2>
-    <form id="form">
-      <label>Name: <input name="name" required></label>
-      <label>Type:
-        <select name="type">
-          <option value="iptv">IPTV (m3u8)</option>
-          <option value="youtube">YouTube Live (channel ID)</option>
-        </select>
-      </label>
-      <label>Link / Channel ID: <input name="link" required></label>
-      <button type="submit">Add Channel</button>
-    </form>
-    <p><a href="index.html">← Back to Player</a></p>
-  </div>
 
-  <script>
-    document.getElementById('form').onsubmit = e => {
-      e.preventDefault();
-      const nm = e.target.name.value.trim(), tp = e.target.type.value, ln = e.target.link.value.trim();
-      fetch('channels.json')
-        .then(r=>r.json())
-        .then(d=>{
-          const arr = tp==='iptv'? d.iptv : d.youtube;
-          arr.push(tp to
+<div id="login">
+  <h2>Admin Login</h2>
+  <input type="password" id="admin-password" placeholder="Enter admin password">
+  <button onclick="checkPassword()">Login</button>
+  <p class="error" id="login-error" style="display:none;">Incorrect password.</p>
+</div>
+
+<div id="form-container" class="hidden">
+  <h2>Add Channel</h2>
+  <select id="channel-type">
+    <option value="iptv">IPTV (HLS)</option>
+    <option value="youtube">YouTube Channel</option>
+  </select>
+  <input type="text" id="channel-name" placeholder="Channel Name" />
+  <input type="text" id="channel-url" placeholder="Stream URL or YouTube Channel ID" />
+  <button onclick="saveChannel()">Save Channel</button>
+  <p id="status"></p>
+</div>
+
+<script>
+  const ADMIN_PASSWORD = 'John2012.';
+
+  function checkPassword() {
+    const pass = document.getElementById('admin-password').value;
+    if (pass === ADMIN_PASSWORD) {
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('form-container').classList.remove('hidden');
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }
+
+  function saveChannel() {
+    const type = document.getElementById('channel-type').value;
+    const name = document.getElementById('channel-name').value.trim();
+    const url = document.getElementById('channel-url').value.trim();
+
+    if (!name || !url) {
+      document.getElementById('status').innerText = 'Please fill in all fields.';
+      return;
+    }
+
+    const newChannel = { name };
+    if (type === 'iptv') newChannel.stream_url = url;
+    else newChannel.youtube_channel_id = url;
+
+    fetch('channels.json')
+      .then(res => res.json())
+      .then(data => {
+        data[type].push(newChannel);
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'channels.json';
+        a.click();
+        document.getElementById('status').innerText = 'Channel saved! Replace channels.json in GitHub.';
+      }).catch(() => {
+        document.getElementById('status').innerText = 'Failed to load channel list.';
+      });
+  }
+</script>
+
+</body>
+</html>
