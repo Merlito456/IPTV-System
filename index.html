@@ -137,6 +137,18 @@
       showNoise(true);
       loadChannels();
     }
+<!-- Hidden link to Add Channel page -->
+<a href="add_channel.html" id="admin-link" style="display: none;">Add Channel</a>
+
+<script>
+  // Press Shift + A to reveal the admin link
+  document.addEventListener('keydown', function(e) {
+    if (e.shiftKey && e.key.toLowerCase() === 'a') {
+      document.getElementById('admin-link').style.display = 'inline';
+      alert('Admin link unlocked');
+    }
+  });
+</script>
   </script>
 </body>
 </html>
