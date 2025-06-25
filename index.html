@@ -68,7 +68,7 @@
   </style>
 
   <script>
-    // Prevent inspect tools
+    // Security & Restrictions
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('keydown', function (e) {
       if (
@@ -186,27 +186,21 @@
     }
 
     function loadChannels() {
-      // Load IPTV from channels.json
       fetch('channels.json')
-        .then(r => r.json())
-        .then(d => {
-          const iptv = $('#iptv-list').empty();
-          d.iptv.forEach(c => {
-            iptv.append(`<div class="channel-item" data-type="iptv" data-stream="${encodeURI(c.stream_url)}">${c.name}</div>`);
-          });
-        })
-        .catch(() => alert('Failed loading IPTV channels'));
+        .then(response => response.json())
+        .then(data => {
+          const iptvList = $('#iptv-list').empty();
+          const ytList = $('#youtube-list').empty();
 
-      // Load YouTube from ytlive.json
-      fetch('ytlive.json')
-        .then(r => r.json())
-        .then(d => {
-          const yt = $('#youtube-list').empty();
-          d.youtube.forEach(c => {
-            yt.append(`<div class="channel-item" data-type="youtube" data-youtubeid="${c.youtube_channel_id}">${c.name}</div>`);
+          data.channels.forEach(channel => {
+            if (channel.stream_url) {
+              iptvList.append(`<div class="channel-item" data-type="iptv" data-stream="${encodeURI(channel.stream_url)}">${channel.name}</div>`);
+            } else if (channel.youtube_channel_id) {
+              ytList.append(`<div class="channel-item" data-type="youtube" data-youtubeid="${channel.youtube_channel_id}">${channel.name}</div>`);
+            }
           });
         })
-        .catch(() => alert('Failed loading YouTube channels'));
+        .catch(() => alert('Failed loading channels.json'));
     }
 
     $('#channel-panel').on('click', '.channel-item', function () {
@@ -224,7 +218,7 @@
     window.onload = () => {
       showOverlay('Checking for YouTube live stream...');
       showNoise(true);
-      autoLoadYouTubeLive('UCxxxxxxxxxxxxxxxxx'); // 🔁 Replace with your default channel ID
+      autoLoadYouTubeLive('UCLA_DiR1FfKNvjuUpBHmylQ'); // NASA Live
       loadChannels();
     };
   </script>
