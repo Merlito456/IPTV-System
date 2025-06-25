@@ -10,11 +10,7 @@
     body, html {
       margin: 0; padding: 0; height: 100%;
       background: #000; font-family: sans-serif;
-      overflow: hidden;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+      overflow: hidden; user-select: none;
     }
     .tv-container { display: flex; height: 100vh; }
     #video-area {
@@ -68,27 +64,18 @@
   </style>
 
   <script>
-    // Security & Restrictions
+    // Security
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('keydown', function (e) {
-      if (
-        e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) ||
-        (e.ctrlKey && ['U', 'u'].includes(e.key))
-      ) {
+      const key = e.key.toLowerCase();
+      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(key)) || (e.ctrlKey && key === 'u')) {
         e.preventDefault();
         return false;
       }
-      if (e.shiftKey && e.key.toLowerCase() === 'a') {
+      if (e.shiftKey && key === 'a') {
         document.getElementById('admin-link').style.display = 'inline';
         alert('Admin link unlocked');
       }
-    });
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('selectstart', e => e.preventDefault());
-    document.addEventListener('copy', e => {
-      e.preventDefault();
-      alert('Copying disabled');
     });
     setInterval(() => {
       if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
@@ -121,9 +108,9 @@
   <script>
     let hls = null, ytPlayer = null, ytApiLoaded = false;
 
-    function showOverlay(txt) { $('#overlay').text(txt).show(); }
+    function showOverlay(text) { $('#overlay').text(text).show(); }
     function hideOverlay() { $('#overlay').hide(); }
-    function showNoise(v) { $('#noise').toggle(v); }
+    function showNoise(on) { $('#noise').toggle(on); }
 
     function clearVideo() {
       if (hls) { hls.destroy(); hls = null; }
@@ -131,82 +118,84 @@
       $('#video-area').find('video, #yt-player').remove();
     }
 
-    function playIPTV(src) {
+    function playIPTV(url) {
       clearVideo(); showOverlay('Loading...'); showNoise(false);
       const video = $('<video autoplay muted controls playsinline>').appendTo('#video-area');
       if (Hls.isSupported()) {
-        hls = new Hls({ enableWorker: true, lowLatencyMode: true });
-        hls.loadSource(src); hls.attachMedia(video[0]);
+        hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video[0]);
         hls.on(Hls.Events.MANIFEST_PARSED, () => { video[0].play(); hideOverlay(); });
-        hls.on(Hls.Events.ERROR, (_, d) => { if (d.fatal) showOverlay('Playback error'); });
+        hls.on(Hls.Events.ERROR, (_, data) => {
+          if (data.fatal) showOverlay('❌ Playback error');
+        });
       } else if (video[0].canPlayType('application/vnd.apple.mpegurl')) {
-        video[0].src = src;
+        video[0].src = url;
         video.on('loadedmetadata', () => { video[0].play(); hideOverlay(); });
       } else {
-        showOverlay('Unsupported format');
+        showOverlay('❌ Format unsupported');
       }
     }
 
-    function loadYouTubeVideoId(videoId) {
-      clearVideo(); showOverlay('Loading YT...'); showNoise(false);
-      if (!ytApiLoaded) {
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        document.body.appendChild(tag);
-        ytApiLoaded = true;
-      }
-      window.onYouTubeIframeAPIReady = () => {
-        $('<div id="yt-player">').appendTo('#video-area');
-        ytPlayer = new YT.Player('yt-player', {
-          height: '100%', width: '100%', videoId: videoId,
-          playerVars: { autoplay: 1, controls: 1, modestbranding: 1, rel: 0, playsinline: 1 },
-          events: {
-            onReady: e => { e.target.playVideo(); hideOverlay(); },
-            onError: () => showOverlay('YT Playback error')
-          }
-        });
-      };
-    }
-
-    function autoLoadYouTubeLive(channelId) {
+    function loadYouTubeLive(channelId) {
+      clearVideo(); showOverlay('Checking YouTube live...'); showNoise(false);
       fetch(`http://vipstreaming.zya.me/get_youtube_live.php?channel_id=${channelId}`)
         .then(r => r.json())
         .then(data => {
           if (data.liveVideoId) {
-            loadYouTubeVideoId(data.liveVideoId);
+            if (!ytApiLoaded) {
+              const s = document.createElement('script');
+              s.src = "https://www.youtube.com/iframe_api";
+              document.body.appendChild(s);
+              ytApiLoaded = true;
+              window.onYouTubeIframeAPIReady = () => createYTPlayer(data.liveVideoId);
+            } else {
+              createYTPlayer(data.liveVideoId);
+            }
           } else {
-            showOverlay('No YouTube live stream currently');
+            showOverlay('🔴 Channel not live');
             showNoise(true);
           }
         })
         .catch(() => {
-          showOverlay('Failed to check YouTube live status');
+          showOverlay('❌ Failed to load YouTube');
           showNoise(true);
         });
     }
 
+    function createYTPlayer(videoId) {
+      $('<div id="yt-player">').appendTo('#video-area');
+      ytPlayer = new YT.Player('yt-player', {
+        height: '100%', width: '100%', videoId,
+        playerVars: { autoplay: 1, controls: 1, modestbranding: 1, rel: 0, playsinline: 1 },
+        events: {
+          onReady: e => { e.target.playVideo(); hideOverlay(); },
+          onError: () => showOverlay('❌ YouTube playback error')
+        }
+      });
+    }
+
     function loadChannels() {
       fetch('channels.json')
-        .then(response => response.json())
+        .then(r => r.json())
         .then(data => {
-          const iptvList = $('#iptv-list').empty();
-          const ytList = $('#youtube-list').empty();
-
-          data.channels.forEach(channel => {
-            if (channel.stream_url) {
-              iptvList.append(`<div class="channel-item" data-type="iptv" data-stream="${encodeURI(channel.stream_url)}">${channel.name}</div>`);
-            } else if (channel.youtube_channel_id) {
-              ytList.append(`<div class="channel-item" data-type="youtube" data-youtubeid="${channel.youtube_channel_id}">${channel.name}</div>`);
+          const iptv = $('#iptv-list').empty();
+          const yt = $('#youtube-list').empty();
+          data.channels.forEach(ch => {
+            if (ch.stream_url) {
+              iptv.append(`<div class="channel-item" data-type="iptv" data-stream="${encodeURI(ch.stream_url)}">${ch.name}</div>`);
+            } else if (ch.youtube_channel_id) {
+              yt.append(`<div class="channel-item" data-type="youtube" data-youtubeid="${ch.youtube_channel_id}">${ch.name}</div>`);
             }
           });
         })
-        .catch(() => alert('Failed loading channels.json'));
+        .catch(() => alert('❌ Failed to load channels.json'));
     }
 
     $('#channel-panel').on('click', '.channel-item', function () {
-      const type = $(this).data('type'), stream = $(this).data('stream'), yid = $(this).data('youtubeid');
-      if (type === 'iptv') playIPTV(stream);
-      else autoLoadYouTubeLive(yid);
+      const type = $(this).data('type');
+      if (type === 'iptv') playIPTV($(this).data('stream'));
+      else loadYouTubeLive($(this).data('youtubeid'));
     });
 
     $('.section-header').click(function () {
@@ -216,9 +205,9 @@
     $('#toggle-panel').click(() => $('#channel-panel').toggleClass('hidden'));
 
     window.onload = () => {
-      showOverlay('Checking for YouTube live stream...');
+      showOverlay('📡 Checking default YouTube channel...');
       showNoise(true);
-      autoLoadYouTubeLive('UCLA_DiR1FfKNvjuUpBHmylQ'); // NASA Live
+      loadYouTubeLive('UCLA_DiR1FfKNvjuUpBHmylQ'); // NASA Default
       loadChannels();
     };
   </script>
