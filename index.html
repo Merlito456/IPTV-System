@@ -7,7 +7,6 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
-    /* (same CSS as your PHP version) */
     body, html { margin:0;padding:0;height:100%; background:#000; font-family:sans-serif; overflow:hidden; }
     .tv-container { display:flex;height:100vh; }
     #video-area { flex:1;position:relative; display:flex; align-items:center; justify-content:center;background:#000; }
@@ -24,14 +23,29 @@
     #controls { position:absolute;top:10px;left:10px;z-index:10; }
     .btn { background:rgba(0,0,0,0.7);color:#fff;padding:10px 15px;border:none;border-radius:5px;cursor:pointer;margin-bottom:5px; }
     .btn:hover { background:rgba(255,255,255,0.2); }
+    #admin-link {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #fff;
+      background: #333;
+      padding: 5px 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      z-index: 20;
+    }
   </style>
   <script>
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('keydown', e => {
-      if (e.key === 'F12' ||
-          (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
-          (e.ctrlKey && ['U','u'].includes(e.key))) {
+      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) || (e.ctrlKey && ['U','u'].includes(e.key))) {
         e.preventDefault();
+      }
+      // Unlock admin link
+      if (e.shiftKey && e.key.toLowerCase() === 'a') {
+        document.getElementById('admin-link').style.display = 'inline';
+        alert('Admin link unlocked');
       }
     });
   </script>
@@ -49,10 +63,12 @@
       <div id="youtube-list" class="section-content"></div>
     </div>
   </div>
+
   <div id="controls">
     <button class="btn" id="toggle-panel">☰</button>
-    <button class="btn" id="goto-add">➕ Add Channel</button>
   </div>
+
+  <a id="admin-link" href="add_channel.html">➕ Add Channel</a>
 
   <script>
     let hls = null, ytPlayer = null, ytApiLoaded = false;
@@ -98,7 +114,6 @@
           playerVars: { autoplay:1, controls:1, modestbranding:1, rel:0, playsinline:1 },
           events: {
             onReady: e => {
-              // Get live video via API fetch-outside static. Here just blank.
               e.target.playVideo(); hideOverlay();
             },
             onError: ()=> showOverlay('YT Playback error')
@@ -130,25 +145,12 @@
     });
 
     $('#toggle-panel').click(()=>$('#channel-panel').toggleClass('hidden'));
-    $('#goto-add').click(()=>window.location.href='add_channel.html');
 
     window.onload = ()=>{
       showOverlay('Choose Channel to play');
       showNoise(true);
       loadChannels();
-    }
-<!-- Hidden link to Add Channel page -->
-<a href="add_channel.html" id="admin-link" style="display: none;">Add Channel</a>
-
-<script>
-  // Press Shift + A to reveal the admin link
-  document.addEventListener('keydown', function(e) {
-    if (e.shiftKey && e.key.toLowerCase() === 'a') {
-      document.getElementById('admin-link').style.display = 'inline';
-      alert('Admin link unlocked');
-    }
-  });
-</script>
+    };
   </script>
 </body>
 </html>
