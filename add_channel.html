@@ -1,118 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Add Channel - Admin Only</title>
+  <meta charset="UTF-8">
+  <title>Add Channel with Stream Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      margin: 0;
-      padding: 20px;
-    }
-
-    #login, #form-container {
-      max-width: 400px;
-      margin: 50px auto;
-      background: #222;
-      padding: 20px;
-      border-radius: 8px;
-    }
-
-    input, button, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 4px;
-    }
-
-    button {
-      background-color: #28a745;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #218838;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .error {
-      color: red;
-      margin-top: 5px;
-    }
+    body { font-family:sans-serif; background:#f4f4f4; padding:20px; }
+    .container { max-width:600px; margin:auto; background:white; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+    h2 { margin-top:0; }
+    label { display:block; margin-top:10px; font-weight:bold; }
+    input, select, button { width:100%; padding:10px; margin-top:5px; }
+    video, iframe { width:100%; height:300px; margin-top:20px; display:none; background:#000; }
+    #result { margin-top:10px; font-weight:bold; color:green; }
+    #error { color:red; }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h2>Add Channel with Stream Test</h2>
 
-<div id="login">
-  <h2>Admin Login</h2>
-  <input type="password" id="admin-password" placeholder="Enter admin password">
-  <button onclick="checkPassword()">Login</button>
-  <p class="error" id="login-error" style="display:none;">Incorrect password.</p>
-</div>
+    <label for="channelName">Channel Name:</label>
+    <input type="text" id="channelName" required>
 
-<div id="form-container" class="hidden">
-  <h2>Add Channel</h2>
-  <select id="channel-type">
-    <option value="iptv">IPTV (HLS)</option>
-    <option value="youtube">YouTube Channel</option>
-  </select>
-  <input type="text" id="channel-name" placeholder="Channel Name" />
-  <input type="text" id="channel-url" placeholder="Stream URL or YouTube Channel ID" />
-  <button onclick="saveChannel()">Save Channel</button>
-  <p id="status"></p>
-</div>
+    <label for="channelType">Channel Type:</label>
+    <select id="channelType">
+      <option value="m3u8">M3U8 (.m3u8)</option>
+      <option value="mpd">MPEG-DASH (.mpd)</option>
+      <option value="youtube">YouTube Live</option>
+    </select>
 
-<script>
-  const ADMIN_PASSWORD = 'John2012.';
+    <label for="channelLink">Channel Link / YouTube Channel ID:</label>
+    <input type="text" id="channelLink" required>
 
-  function checkPassword() {
-    const pass = document.getElementById('admin-password').value;
-    if (pass === ADMIN_PASSWORD) {
-      document.getElementById('login').style.display = 'none';
-      document.getElementById('form-container').classList.remove('hidden');
-    } else {
-      document.getElementById('login-error').style.display = 'block';
-    }
-  }
+    <button id="testBtn">Test Stream</button>
+    <button id="submitBtn" disabled>Submit Channel</button>
 
-  function saveChannel() {
-    const type = document.getElementById('channel-type').value;
-    const name = document.getElementById('channel-name').value.trim();
-    const url = document.getElementById('channel-url').value.trim();
+    <div id="result"></div>
+    <div id="error"></div>
 
-    if (!name || !url) {
-      document.getElementById('status').innerText = 'Please fill in all fields.';
-      return;
-    }
+    <video id="videoPlayer" controls autoplay muted></video>
+    <div id="ytPlayerContainer" style="display:none;">
+      <iframe id="ytPlayer" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
 
-    const newChannel = { name };
-    if (type === 'iptv') newChannel.stream_url = url;
-    else newChannel.youtube_channel_id = url;
+  <script>
+    const testBtn = document.getElementById('testBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const video = document.getElementById('videoPlayer');
+    const ytContainer = document.getElementById('ytPlayerContainer');
+    const ytIframe = document.getElementById('ytPlayer');
 
-    fetch('channels.json')
-      .then(res => res.json())
-      .then(data => {
-        data[type].push(newChannel);
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    testBtn.addEventListener('click', () => {
+      const name = document.getElementById('channelName').value.trim();
+      const type = document.getElementById('channelType').value;
+      const link = document.getElementById('channelLink').value.trim();
+      const result = document.getElementById('result');
+      const error = document.getElementById('error');
 
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'channels.json';
-        a.click();
-        document.getElementById('status').innerText = 'Channel saved! Replace channels.json in GitHub.';
-      }).catch(() => {
-        document.getElementById('status').innerText = 'Failed to load channel list.';
-      });
-  }
-</script>
+      result.textContent = '';
+      error.textContent = '';
+      submitBtn.disabled = true;
+      video.style.display = 'none';
+      ytContainer.style.display = 'none';
+      ytIframe.src = '';
 
+      if (!name || !link) {
+        error.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      if (type === 'm3u8') {
+        video.style.display = 'block';
+        if (Hls.isSupported()) {
+          const hls = new Hls();
+          hls.loadSource(link);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, () => {
+            result.textContent = '✅ Stream working!';
+            submitBtn.disabled = false;
+          });
+          hls.on(Hls.Events.ERROR, function (event, data) {
+            error.textContent = "❌ Error: " + data.details;
+          });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = link;
+          video.addEventListener('loadedmetadata', () => {
+            result.textContent = '✅ Stream working!';
+            submitBtn.disabled = false;
+          });
+        } else {
+          error.textContent = "HLS not supported.";
+        }
+      } else if (type === 'mpd') {
+        video.style.display = 'block';
+        const player = dashjs.MediaPlayer().create();
+        player.initialize(video, link, true);
+        player.on('error', e => error.textContent = "❌ Stream error");
+        player.on('playbackPlaying', () => {
+          result.textContent = '✅ Stream working!';
+          submitBtn.disabled = false;
+        });
+      } else if (type === 'youtube') {
+        ytContainer.style.display = 'block';
+        ytIframe.src = `https://www.youtube.com/embed/live_stream?channel=${link}&autoplay=1`;
+        result.textContent = '✅ Check if YouTube Live appears.';
+        submitBtn.disabled = false;
+      }
+    });
+
+    submitBtn.addEventListener('click', () => {
+      const type = document.getElementById('channelType').value;
+      const name = document.getElementById('channelName').value.trim();
+      const link = document.getElementById('channelLink').value.trim();
+
+      const data = localStorage.getItem('iptv_static_channels') || '[]';
+      const channels = JSON.parse(data);
+
+      channels.push({ name, type, link });
+      localStorage.setItem('iptv_static_channels', JSON.stringify(channels));
+
+      alert("Channel saved locally!");
+      document.getElementById('channelName').value = '';
+      document.getElementById('channelLink').value = '';
+      submitBtn.disabled = true;
+      document.getElementById('result').textContent = '';
+    });
+  </script>
 </body>
 </html>
