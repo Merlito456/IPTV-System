@@ -1,0 +1,16 @@
+{
+  "youtube": [
+    {
+      "name": "ABS-CBN News",
+      "youtube_channel_id": "UCjz6Kzhu9HBT9n5Mmx9zYzg"
+    },
+    {
+      "name": "GMA News",
+      "youtube_channel_id": "UCcD9vWvwiUdxF4jXU_Mp49w"
+    },
+    {
+      "name": "24 Oras",
+      "youtube_channel_id": "UChvayYF-SiFnfa7K-m9A2BQ"
+    }
+  ]
+}
