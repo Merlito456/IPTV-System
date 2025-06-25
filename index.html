@@ -2,25 +2,141 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Static IPTV Player</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Online TV (Static)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    /* (same CSS as your PHP version) */
+    body, html { margin:0;padding:0;height:100%; background:#000; font-family:sans-serif; overflow:hidden; }
+    .tv-container { display:flex;height:100vh; }
+    #video-area { flex:1;position:relative; display:flex; align-items:center; justify-content:center;background:#000; }
+    video, iframe { width:100%;height:100%;object-fit:contain; }
+    #noise { position:absolute;top:0;left:0;width:100%;height:100%; background:url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif') center/cover; display:none; }
+    #overlay { position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center; color:#fff; font-size:24px; background:rgba(0,0,0,0.5); }
+    #channel-panel { width:300px;background:#111;color:#fff;overflow-y:auto;transition:transform .3s; }
+    #channel-panel.hidden { transform:translateX(-100%); }
+    .section-header { padding:10px;background:#222;cursor:pointer;border-bottom:1px solid #333; }
+    .section-content { display:none;flex-direction:column; }
+    .section-content.expanded { display:flex; }
+    .channel-item { padding:10px;border-bottom:1px solid #333;cursor:pointer; }
+    .channel-item:hover { background:#333; }
+    #controls { position:absolute;top:10px;left:10px;z-index:10; }
+    .btn { background:rgba(0,0,0,0.7);color:#fff;padding:10px 15px;border:none;border-radius:5px;cursor:pointer;margin-bottom:5px; }
+    .btn:hover { background:rgba(255,255,255,0.2); }
+  </style>
+  <script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (e.key === 'F12' ||
+          (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
+          (e.ctrlKey && ['U','u'].includes(e.key))) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </head>
 <body>
-  <h1>📺 IPTV Player</h1>
-
-  <div class="form-container">
-    <input type="text" id="channelName" placeholder="Channel name">
-    <input type="text" id="channelUrl" placeholder="HLS (.m3u8) URL">
-    <button onclick="addChannel()">➕ Add Channel</button>
+  <div class="tv-container">
+    <div id="video-area">
+      <div id="noise"></div>
+      <div id="overlay">Choose Channel to play</div>
+    </div>
+    <div id="channel-panel">
+      <div class="section-header" data-target="iptv-list">📺 IPTV Channels</div>
+      <div id="iptv-list" class="section-content expanded"></div>
+      <div class="section-header" data-target="youtube-list">🎥 YouTube Live Channels</div>
+      <div id="youtube-list" class="section-content"></div>
+    </div>
+  </div>
+  <div id="controls">
+    <button class="btn" id="toggle-panel">☰</button>
+    <button class="btn" id="goto-add">➕ Add Channel</button>
   </div>
 
-  <div class="channel-list" id="channelList"></div>
+  <script>
+    let hls = null, ytPlayer = null, ytApiLoaded = false;
 
-  <div class="video-container">
-    <video id="video" controls autoplay></video>
-  </div>
+    function showOverlay(txt) { $('#overlay').text(txt).show(); }
+    function hideOverlay() { $('#overlay').hide(); }
+    function showNoise(v) { $('#noise').toggle(v); }
 
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script src="player.js"></script>
+    function clearVideo() {
+      if (hls) { hls.destroy(); hls = null; }
+      if (ytPlayer && ytPlayer.destroy) { ytPlayer.destroy(); ytPlayer = null; }
+      $('#video-area').find('video, #yt-player').remove();
+    }
+
+    function playIPTV(src) {
+      clearVideo(); showOverlay('Loading...'); showNoise(false);
+      const video = $('<video autoplay muted controls playsinline>').appendTo('#video-area');
+      if (Hls.isSupported()) {
+        hls = new Hls({ enableWorker:true, lowLatencyMode:true });
+        hls.loadSource(src); hls.attachMedia(video[0]);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => { video[0].play(); hideOverlay(); });
+        hls.on(Hls.Events.ERROR, (_, d) => { if (d.fatal) showOverlay('Playback error'); });
+      } else if (video[0].canPlayType('application/vnd.apple.mpegurl')) {
+        video[0].src = src;
+        video.on('loadedmetadata', () => { video[0].play(); hideOverlay(); });
+      } else {
+        showOverlay('Unsupported format');
+      }
+    }
+
+    function loadYouTube(channelId) {
+      clearVideo(); showOverlay('Loading YT...'); showNoise(false);
+      if (!ytApiLoaded) {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.body.appendChild(tag);
+        ytApiLoaded = true;
+      }
+      window.onYouTubeIframeAPIReady = () => {
+        $('<div id="yt-player">').appendTo('#video-area');
+        ytPlayer = new YT.Player('yt-player', {
+          height: '100%', width: '100%', videoId: '',
+          playerVars: { autoplay:1, controls:1, modestbranding:1, rel:0, playsinline:1 },
+          events: {
+            onReady: e => {
+              // Get live video via API fetch-outside static. Here just blank.
+              e.target.playVideo(); hideOverlay();
+            },
+            onError: ()=> showOverlay('YT Playback error')
+          }
+        });
+      };
+    }
+
+    function loadChannels() {
+      fetch('channels.json')
+        .then(r => r.json())
+        .then(d => {
+          const iptv = $('#iptv-list').empty();
+          d.iptv.forEach(c => iptv.append(`<div class="channel-item" data-type="iptv" data-stream="${encodeURI(c.stream_url)}">${c.name}</div>`));
+          const yt = $('#youtube-list').empty();
+          d.youtube.forEach(c => yt.append(`<div class="channel-item" data-type="youtube" data-youtubeid="${c.youtube_channel_id}">${c.name}</div>`));
+        })
+        .catch(e => alert('Failed loading channels'));
+    }
+
+    $('#channel-panel').on('click', '.channel-item', function(){
+      const type = $(this).data('type'), stream = $(this).data('stream'), yid = $(this).data('youtubeid');
+      if (type==='iptv') playIPTV(stream);
+      else loadYouTube(yid);
+    });
+
+    $('.section-header').click(function(){
+      $('#' + $(this).data('target')).toggleClass('expanded');
+    });
+
+    $('#toggle-panel').click(()=>$('#channel-panel').toggleClass('hidden'));
+    $('#goto-add').click(()=>window.location.href='add_channel.html');
+
+    window.onload = ()=>{
+      showOverlay('Choose Channel to play');
+      showNoise(true);
+      loadChannels();
+    }
+  </script>
 </body>
 </html>
