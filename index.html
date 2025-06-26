@@ -1,44 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Online TV (Dynamic)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
-    body, html {
+    html, body {
       margin: 0; padding: 0; height: 100%;
-      background: #000; font-family: sans-serif;
-      overflow: hidden; user-select: none;
+      background: #000; font-family: sans-serif; overflow: hidden;
     }
     .tv-container { display: flex; height: 100vh; }
     #video-area {
-      flex: 1; position: relative;
-      display: flex; align-items: center; justify-content: center;
-      background: #000;
+      flex: 1; background: #000; display: flex; align-items: center; justify-content: center; position: relative;
     }
-    video, iframe, #yt-player { width: 100%; height: 100%; object-fit: contain; }
-    #noise {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif') center/cover;
-      display: none;
+    video, iframe {
+      width: 100%; height: 100%; object-fit: contain;
     }
     #overlay {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       display: flex; align-items: center; justify-content: center;
       color: #fff; font-size: 24px;
       background: rgba(0, 0, 0, 0.5);
     }
     #channel-panel {
-      width: 300px; background: #111; color: #fff;
-      overflow-y: auto; transition: transform .3s;
+      width: 300px; background: #111; color: #fff; overflow-y: auto;
     }
-    #channel-panel.hidden { transform: translateX(-100%); }
     .section-header {
-      padding: 10px; background: #222; cursor: pointer;
-      border-bottom: 1px solid #333;
+      padding: 10px; background: #222; font-weight: bold; cursor: pointer; border-bottom: 1px solid #333;
     }
     .section-content { display: none; flex-direction: column; }
     .section-content.expanded { display: flex; }
@@ -52,42 +42,14 @@
     .btn {
       background: rgba(0, 0, 0, 0.7); color: #fff;
       padding: 10px 15px; border: none; border-radius: 5px;
-      cursor: pointer; margin-bottom: 5px;
-    }
-    .btn:hover { background: rgba(255, 255, 255, 0.2); }
-    #admin-link {
-      display: none; position: absolute; top: 10px; right: 10px;
-      color: #fff; background: #333;
-      padding: 5px 10px; border-radius: 5px;
-      text-decoration: none; z-index: 20;
+      cursor: pointer;
     }
   </style>
-
-  <script>
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('keydown', function (e) {
-      const key = e.key.toLowerCase();
-      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(key)) || (e.ctrlKey && key === 'u')) {
-        e.preventDefault();
-        return false;
-      }
-      if (e.shiftKey && key === 'a') {
-        document.getElementById('admin-link').style.display = 'inline';
-        alert('Admin link unlocked');
-      }
-    });
-    setInterval(() => {
-      if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
-        document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:20%;'>🚫 Developer Tools Detected</h1>";
-      }
-    }, 1000);
-  </script>
 </head>
 
 <body>
   <div class="tv-container">
     <div id="video-area">
-      <div id="noise"></div>
       <div id="overlay">Choose Channel to play</div>
     </div>
     <div id="channel-panel">
@@ -102,80 +64,85 @@
     <button class="btn" id="toggle-panel">☰</button>
   </div>
 
-  <a id="admin-link" href="add_channel.php">➕ Add Channel</a>
-
   <script>
     let hls = null;
 
-    function showOverlay(text) { $('#overlay').text(text).show(); }
-    function hideOverlay() { $('#overlay').hide(); }
-    function showNoise(on) { $('#noise').toggle(on); }
-
+    function showOverlay(text) {
+      $('#overlay').text(text).show();
+    }
+    function hideOverlay() {
+      $('#overlay').hide();
+    }
     function clearVideo() {
       if (hls) { hls.destroy(); hls = null; }
-      $('#video-area').find('video, #yt-player').remove();
+      $('#video-area').find('video, iframe').remove();
     }
 
     function playIPTV(url) {
-      clearVideo(); showOverlay('Loading...'); showNoise(false);
-      const video = $('<video autoplay muted controls playsinline>').appendTo('#video-area');
+      clearVideo(); showOverlay("Loading...");
+      const video = $('<video autoplay controls muted playsinline></video>').appendTo('#video-area');
       if (Hls.isSupported()) {
         hls = new Hls();
         hls.loadSource(url);
         hls.attachMedia(video[0]);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => { video[0].play(); hideOverlay(); });
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video[0].play(); hideOverlay();
+        });
         hls.on(Hls.Events.ERROR, (_, data) => {
-          if (data.fatal) showOverlay('❌ Playback error');
+          if (data.fatal) showOverlay("❌ Playback error");
         });
       } else if (video[0].canPlayType('application/vnd.apple.mpegurl')) {
         video[0].src = url;
-        video.on('loadedmetadata', () => { video[0].play(); hideOverlay(); });
+        video.on('loadedmetadata', () => {
+          video[0].play(); hideOverlay();
+        });
       } else {
-        showOverlay('❌ Format unsupported');
+        showOverlay("❌ HLS not supported");
       }
     }
 
-    function loadYouTubeLive(channelId) {
-      clearVideo();
-      showOverlay('Loading YouTube Live...');
-      showNoise(false);
-
-      $('#video-area').append(`
-        <iframe id="yt-player"
-                src="https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                frameborder="0"></iframe>
-      `);
-
+    function playYouTube(channelId) {
+      clearVideo(); showOverlay("Loading YouTube Live...");
+      const iframe = $(`
+        <iframe
+          src="https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+          frameborder="0">
+        </iframe>
+      `).appendTo('#video-area');
       hideOverlay();
     }
 
     function loadChannels() {
       fetch('./channels.json')
-        .then(r => r.json())
+        .then(response => response.json())
         .then(data => {
           const iptv = $('#iptv-list').empty();
           const yt = $('#youtube-list').empty();
+
           if (Array.isArray(data.channels)) {
             data.channels.forEach(ch => {
+              const name = ch.name || "Unnamed Channel";
               if (ch.stream_url) {
-                iptv.append(`<div class="channel-item" data-type="iptv" data-stream="${encodeURI(ch.stream_url)}">${ch.name}</div>`);
+                iptv.append(`<div class="channel-item" data-type="iptv" data-stream="${ch.stream_url}">${name}</div>`);
               } else if (ch.youtube_channel_id) {
-                yt.append(`<div class="channel-item" data-type="youtube" data-youtubeid="${ch.youtube_channel_id}">${ch.name}</div>`);
+                yt.append(`<div class="channel-item" data-type="youtube" data-youtubeid="${ch.youtube_channel_id}">${name}</div>`);
               }
             });
           } else {
-            alert("❌ Invalid channel data");
+            showOverlay("❌ Invalid JSON format");
           }
         })
-        .catch(() => alert('❌ Failed to load channels'));
+        .catch(() => {
+          showOverlay("❌ Failed to load channels");
+        });
     }
 
     $('#channel-panel').on('click', '.channel-item', function () {
       const type = $(this).data('type');
       if (type === 'iptv') playIPTV($(this).data('stream'));
-      else loadYouTubeLive($(this).data('youtubeid'));
+      else playYouTube($(this).data('youtubeid'));
     });
 
     $('.section-header').click(function () {
@@ -185,9 +152,7 @@
     $('#toggle-panel').click(() => $('#channel-panel').toggleClass('hidden'));
 
     window.onload = () => {
-      showOverlay('📡 Checking default YouTube channel...');
-      showNoise(true);
-      loadYouTubeLive('UCLA_DiR1FfKNvjuUpBHmylQ'); // Default NASA Live
+      showOverlay("📡 Loading channels...");
       loadChannels();
     };
   </script>
