@@ -119,17 +119,17 @@
       const type = document.getElementById('channelType').value;
       const name = document.getElementById('channelName').value.trim();
       const link = document.getElementById('channelLink').value.trim();
+      const result = document.getElementById('result');
+      const error = document.getElementById('error');
 
-      let payload = { name, type };
+      let payload = {
+        name: name,
+        type: type,
+        stream_url: type !== 'youtube' ? link : '',
+        youtube_channel_id: type === 'youtube' ? link : ''
+      };
 
-      // Correct field assignment
-      if (type === 'youtube') {
-        payload.youtube_channel_id = link;
-      } else {
-        payload.stream_url = link;
-      }
-
-      fetch('http://vipstreaming.zya.me/save_channel.php', {
+      fetch('https://script.google.com/macros/s/AKfycbxDKD8gsgETJCSfxe1P1N38QLUrHNWbbvXRE4ZwkeBl86W5ZYVG4WogMMus8rcIAMzA/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -137,18 +137,17 @@
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
-          alert('✅ Channel saved successfully!');
+          result.textContent = '✅ Channel saved to Google Sheets!';
           document.getElementById('channelName').value = '';
           document.getElementById('channelLink').value = '';
-          document.getElementById('result').textContent = '';
           submitBtn.disabled = true;
         } else {
-          alert('❌ Error: ' + (data.error || 'Unknown error'));
+          error.textContent = '❌ Error: ' + (data.message || 'Unknown error');
         }
       })
       .catch(err => {
         console.error(err);
-        alert('❌ Network or server error');
+        error.textContent = '❌ Network or server error';
       });
     });
   </script>
