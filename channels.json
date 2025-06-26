@@ -1,18 +1,1660 @@
+<?php
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
+echo file_get_contents("channels.json");
+?>
+
 {
-  "iptv": [
-    {
-      "name": "BBC News",
-      "stream_url": "https://your-m3u8-link.m3u8"
-    },
-    {
-      "name": "CNN Live",
-      "stream_url": "https://another-stream.m3u8"
-    }
-  ],
-  "youtube": [
-    {
-      "name": "NASA Live",
-      "youtube_channel_id": "UCLA_DiR1FfKNvjuUpBHmylQ"
-    }
-  ]
+    "channels": [
+        {
+            "name": "30A Investment Speech",
+            "type": "iptv",
+            "stream_url": "https://30a-tv.com/feeds/720p/33.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "30A Music",
+            "type": "iptv",
+            "stream_url": "https://30a-tv.com/feeds/720p/6.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "A-Z Crime Stories",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCjuh0qjvdbu6ig5Y1o3V8mQ"
+        },
+        {
+            "name": "A2Z (PH)",
+            "type": "iptv",
+            "stream_url": "https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_4.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "ABC",
+            "type": "iptv",
+            "stream_url": "https://fl1.moveonjoy.com/ABC_EAST/tracks-v1a1/mono.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "ABC (MIAMI FL)",
+            "type": "iptv",
+            "stream_url": "https://dai.google.com/linear/hls/pb/event/tQD6w9OJQVOobcyV3Dammw/stream/c80c2be7-ef2f-4dc1-9503-e3c3df2c4afc:SIN2/variant/fce6b9ce4a39dc7793ac4e35fc49be1f/bandwidth/1812800.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "ABC 13 News",
+            "type": "iptv",
+            "stream_url": "https://content.uplynk.com/channel/ext/1efe3bfc4d1e4b5db5e5085a535b510b/ktrk_24x7_news.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "ABC News (Australia)",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCVgO39Bk5sMo66-6o6Spn6Q"
+        },
+        {
+            "name": "ABN Bible Movies Channel",
+            "type": "iptv",
+            "stream_url": "https://mediaserver.abnvideos.com/streams/abnbiblemovies.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Absolute History",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCr5qeBG9g7bGtMGyHG2GzbQ"
+        },
+        {
+            "name": "Action Hollywood Movies",
+            "type": "iptv",
+            "stream_url": "https://amg01076-lightningintern-actionhollywood-samsungnz-82rry.amagi.tv/ts-eu-w1-n2/playlist/amg01076-lightningintern-actionhollywood-samsungnz/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf50f42d16ff2b14e1c882c47e0815fc8d54abb9d85539e429b71a416cc9bf3888045d08fc501056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac68139e1b8a32f2c525c405a49fdec4bd1754a67a288161cec4/108/848x480_1249600/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Adventure Time",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCFuU-5B1eKAWaTeLUu3JuyA"
+        },
+        {
+            "name": "Alien Nation",
+            "type": "iptv",
+            "stream_url": "https://linear-888.frequency.stream/dist/xumo/888/hls/master/playlist_webvtt.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "AMC",
+            "type": "iptv",
+            "stream_url": "https://fl5.moveonjoy.com/AMC_NETWORK/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "AMC All Reality (US)",
+            "type": "iptv",
+            "stream_url": "https://amc-absolutereality-1-us.lg.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "AMC Thrillers Alt",
+            "type": "iptv",
+            "stream_url": "https://amc-rushbyamc-1-us.vizio.wurl.tv/512.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "AMD The Walking Dead Fan Experience (US)",
+            "type": "iptv",
+            "stream_url": "https://amc-twdfanexperience-1-us.lg.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "America's Funniest Home Videos",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC_zEzzq54Rm0iy7lmmZbCIg"
+        },
+        {
+            "name": "Arirang",
+            "type": "iptv",
+            "stream_url": "https://amg02040-amg02040c6-xiaomi-international-5845.playouts.now.amagi.tv/playlist_fc18f0fd_32af14aa.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Arirang TV (KOR)",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC-PHIZjV-oX8H7zD1cCN2NQ"
+        },
+        {
+            "name": "AXS TV",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/Axs_TV/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "AZ Crime",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCg-G5hSDbnc9c8ggsi7H1cw"
+        },
+        {
+            "name": "Baby Shark TV",
+            "type": "iptv",
+            "stream_url": "https://newidco-babysharktv-1-eu.rakuten.wurl.tv/1200.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Baby Zoo TV",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC-QQbs2-hExS4Jl-ulDCJsA"
+        },
+        {
+            "name": "Banijay Bluelight",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCJrOaDmUVrlaOYvjjvvk7pQ"
+        },
+        {
+            "name": "Banijay Crime - Crime Documentary",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC_0r3EheCnp-wVvndYDGviQ"
+        },
+        {
+            "name": "Banijay Documentaries",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCFrO-dKhooOuTtix5dia2_g"
+        },
+        {
+            "name": "Banijay History",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCb7xZQi7F3RW7BNtR57cNnA"
+        },
+        {
+            "name": "BBC America",
+            "type": "iptv",
+            "stream_url": "https://dvrfl04.tulix.tv/teleup-bbca/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "BBC Dinos 24x7 (US)",
+            "type": "iptv",
+            "stream_url": "https://amg00793-amg00793c35-lg-us-6412.playouts.now.amagi.tv/playlist540-p.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "BBC Earth",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCwmZiChSryoWQCZMIQezgTg"
+        },
+        {
+            "name": "BBC Earth (US)",
+            "type": "iptv",
+            "stream_url": "https://d3u3pfhhvuad9k.cloudfront.net/playlist/amg00793-bbcstudios-bbcearta-lgus/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55c138d6da9b54d1d882c47e1845fc8d54abb9ddc539b4a9b7ef31298c3a48dd4138bd39601056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca68738aed82af7bea02169cc7ea78706639a67809efcfcb1f6d6fe/3/426x240_349739/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "BBC Earth Science",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCdsOTr6SmDrxuWE7sJFrkhQ"
+        },
+        {
+            "name": "BBC Top Gear (US)",
+            "type": "iptv",
+            "stream_url": "https://amg00793-amg00793c5-xumo-us-2664.playouts.now.amagi.tv/bbcstudios-bbctopgear8min-all/playlist360-tp.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "BBC World Service",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCQXHTFnQYFTqN0MqmNh9EIA"
+        },
+        {
+            "name": "Bible Prayers",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCJ_5-M4_0KjFfA0Oq2tpvhg"
+        },
+        {
+            "name": "Billiards TV",
+            "type": "iptv",
+            "stream_url": "https://newidco-billiardstv-1-eu.xiaomi.wurl.tv/192.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Bloomberg News",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UChirEOpgFCupRAk5etXqPaA"
+        },
+        {
+            "name": "Bloomberg Television",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCIALMKvObZNtJ6AmdCLP7Lg"
+        },
+        {
+            "name": "Bloomberg TV+",
+            "type": "iptv",
+            "stream_url": "https://bloomberg-bloomberg-3-br.samsung.wurl.tv/manifest/d26f7868b6521f7e79c6df2644f9de17.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Bluey - Official Channel",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCVzLLZkDuFGAE2BGdBuBNBg"
+        },
+        {
+            "name": "Boomerang UK",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCmst562fALOY2cKb4IFgqEg"
+        },
+        {
+            "name": "Boxing TV",
+            "type": "iptv",
+            "stream_url": "https://1180885077.rsc.cdn77.org/HLS/BOXINGTV_v2.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Britbox Mysteries 1",
+            "type": "iptv",
+            "stream_url": "https://aegis-cloudfront-1.tubi.video/647bc22c-e1bb-4bca-afaf-5de99cbc2286/playlist_640x360.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "BuzzFeed Unsolved Network",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCKijjvu6bN1c-ZHVwR7-5WA"
+        },
+        {
+            "name": "Cartoon Classics",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/d5543c06-5122-49a7-9662-32187f48aa2c/c3d1524a-7686-4ca9-a1c6-6ab0bbf0c801/0.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Cartoonito",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCrFslqncMIdjD2WfB6pAcEg"
+        },
+        {
+            "name": "Catholic TV",
+            "type": "iptv",
+            "stream_url": "https://catholictvhd-lh.akamaized.net/hls/live/2043390/CTVLiveHD/playlist_5.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Caught in Providence",
+            "type": "iptv",
+            "stream_url": "https://livetv-fa.tubi.video/caught-in-providence2/240p-cc/index.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Chocolate Sundaes Comedy",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCv8G-xZ_BBGufjbN6jbvLMQ"
+        },
+        {
+            "name": "CineLife",
+            "type": "iptv",
+            "stream_url": "https://magnoliaa-cinelife-oando-n6z8u.amagi.tv/playlist/magnoliaA-cinelife-oando/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf50c408c6ff3b11848882c47e0835fc8d54abb9d8652cb409b76f714cc90f2d8d211838fc301056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac6d1c661bbde1d1cfbe1c611c9a384da5884d08eaf6819a88f060f2/157/848x480_849028/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Circle",
+            "type": "iptv",
+            "stream_url": "https://circle-roku.amagi.tv/480p-cc/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Classic Cinema",
+            "type": "iptv",
+            "stream_url": "https://bozztv.com/gusa/gusa-classiccinema/tracks-v1a1/mono.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Classic Mr Bean",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCEwIUtFBhaI2L2PuKv0KL2g"
+        },
+        {
+            "name": "ClipZone: Comedy Callbacks",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC5V8MdQsT_gLlw8rTyf7jVQ"
+        },
+        {
+            "name": "ClipZone: Heroes & Villains",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCQt7Z-GE0wF8AzFNvQEqjvg"
+        },
+        {
+            "name": "ClipZone: High Octane Hits",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCwXgxPwky2cyU7iNXeV75LA"
+        },
+        {
+            "name": "ClipZone: Horrorscapes",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCIiywCyB-X7AQgI0WnU0aLA"
+        },
+        {
+            "name": "CNBC",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCvJJ_dzjViJCoLf5uKUTwoA"
+        },
+        {
+            "name": "Conflict (US)",
+            "type": "iptv",
+            "stream_url": "https://rightsboosterltd-conflict-1-us.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Court TV",
+            "type": "iptv",
+            "stream_url": "https://content.uplynk.com/channel/6c0bd0f94b1d4526a98676e9699a10ef.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Cozy TV",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/COZI_TV/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Crime 360",
+            "type": "iptv",
+            "stream_url": "https://94a3e237.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0NyaW1lMzYwX0hMUw/playlist.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Crime and Punishment (US)",
+            "type": "iptv",
+            "stream_url": "https://rightsboosterltd-crime-and-punishment-1-us.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Curious? History",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCnn7eNKVlT2VHY3Vcq_Ohcg"
+        },
+        {
+            "name": "Danger Vision",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/453971f3-855a-455e-9353-ebbb069583a4/d8810e24-6ec9-4233-8595-3254e08fe59c/0.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Deal or No Deal",
+            "type": "iptv",
+            "stream_url": "https://amg00627-banijaygroup-dealornodeal-vizious-g3skv.amagi.tv/playlist/amg00627-banijaygroup-dealornodeal-vizious/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55444de64a6b41c4f882c47e0825fc8d54abb9ddd5a96159b73a4419e9bf98bd24182d29501056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac6b1e661bbde181c3be1c614af517c30af04ec961d0fd457dd715b4/135/426x240_511680/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Discovery Australia",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCsnsCFJMPIJaUSVP_hLVUCA"
+        },
+        {
+            "name": "Disney Channel",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCktaw9L-f65LzUUdjmCFkbQ"
+        },
+        {
+            "name": "Disney Channel Animation",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCw7SNYrYei7F5ttQO3o-rpA"
+        },
+        {
+            "name": "Disney Jr.",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCNcdbMyA59zE-Vk668bKWOg"
+        },
+        {
+            "name": "Docu Vision",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/sofastplayout/7e8d2a51-985d-4e76-bf7e-91edf0aa6e5f_0_HLS/bitrate0.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Dtoons",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCgES0Z8huzTIQiq9L_8Tr5Q"
+        },
+        {
+            "name": "DW News",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCknLrEdhRCp1aegoMqRaCZg"
+        },
+        {
+            "name": "DZRH News Television",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCcTiBX8js_djhSSlmJRI99A"
+        },
+        {
+            "name": "ElderFox Documentaries",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCZvxw99l3xDC6BIHb8nJKGg"
+        },
+        {
+            "name": "Elevator Worship",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "f8d7ZCN8iBS1n_qK"
+        },
+        {
+            "name": "Emma And Joey - Nursery Rhymes",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCc0cGIbYYj79_IUI2A70UjQ"
+        },
+        {
+            "name": "Encore+",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/umaxx/v1/01970b15333e1ebd416a283af72c86/01970b157df71ebd470414fa6dc31d/encore_plus_1000k.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "English Speeches",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCLyr-hfWVCKHcZjV5fg3jbw"
+        },
+        {
+            "name": "Extinct Planet",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCdVun4Kgyie4RUZNuihEJhg"
+        },
+        {
+            "name": "Farscape",
+            "type": "iptv",
+            "stream_url": "https://estrellatv-oando.amagi.tv/playlistR288p.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Fashion TV",
+            "type": "iptv",
+            "stream_url": "https://amg01546-ftv-fashiontv-xiaomi-i9oiw.amagi.tv/playlist/amg01546-ftv-fashiontv-xiaomi/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55b108b38a7b81419882c47e0865fc8d54abb9d860fcc4b9b20a446cf94f58bd74381d79101056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873ba56b531f9a3c0abb99e2dbefad0ae0beac34cd238082a245a70f3e/83/848x480_1249600/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Fidele TV",
+            "type": "iptv",
+            "stream_url": "https://59d39900ebfb8.streamlock.net/FIDELETV/FIDELETV/chunklist_w1779269964.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Fight TV",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/70e45fc8-1f6c-4492-ac26-9868f70f4e02/ace54819-fdce-4f17-be59-e3b75a736b3c/0.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Filmrise 1",
+            "type": "iptv",
+            "stream_url": "https://apollo.production-public.tubi.io/live/ac-forensic-files.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Filmrise 2",
+            "type": "iptv",
+            "stream_url": "https://apollo.production-public.tubi.io/live/ac-filmrise-true-crime.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Filmrise: Unsolved Mysteries",
+            "type": "iptv",
+            "stream_url": "https://livetv-fa.tubi.video/unsolved-mysteries/index_3.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Fox 5 Washington DC",
+            "type": "iptv",
+            "stream_url": "https://d1k44gqwm6uiz4.cloudfront.net/playlist/amg00488-foxdigital-fox5dcwttg-vizious/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55c4c8c3fa4b04e49882c47e0835fc8d54abb9d8609cb169b7ea012cb97f9ddda44d6d39101056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac61199e1bee29f2c525083acaafadeab38b1eb2e583fafc2493/192/1280x720_3000140/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Fox News Channel",
+            "type": "iptv",
+            "stream_url": "https://247preview.foxnews.com/hls/live/2020027/fncv3preview/primary_300.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "FRANCE 24 English",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCQfwfsi5VrQ8yKZ-UWmAEFg"
+        },
+        {
+            "name": "G.I. JOE - Official Channel",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCsnFUEcs3dTmsoPRBY4b7tA"
+        },
+        {
+            "name": "Glory Kickboxing",
+            "type": "iptv",
+            "stream_url": "https://6f972d29.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0dsb3J5S2lja2JveGluZ19ITFM/playlist.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "GMA Network",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCKL5hAuzgFQsyrsQKgU0Qng"
+        },
+        {
+            "name": "Go USA (EU)",
+            "type": "iptv",
+            "stream_url": "https://brandusa-gousa-1-eu.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Go2Travel",
+            "type": "iptv",
+            "stream_url": "https://go2thls.wns.live/hls/stream.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Gospel Broadcasting Network (GBN)",
+            "type": "iptv",
+            "stream_url": "https://cdn3.wowza.com/5/Ny9jK1A1Q3h4N1VZ/live/myStream/chunklist.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Great Movies! (IE) Geo",
+            "type": "iptv",
+            "stream_url": "https://amg01753-amg01753c3-lg-ie-2962.playouts.now.amagi.tv/playlist/amg01753-narrativeuk-greatmovies-lgie/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55b42dd6df3e7151c882c47e1845fc8d54abb9d850e99429b70a04798c7a38fd0188b869501056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac6a1e661bbde18fa1be1c6178ff444325836b9fe6bd5fc0e4300bbd/125/848x480_1686360/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Grit",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/GRIT_TV/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Grit Xtra",
+            "type": "iptv",
+            "stream_url": "https://livetv-fa.tubi.video/grit-extra/playlist_1200k.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Gusto TV",
+            "type": "iptv",
+            "stream_url": "https://amg01077-gustoworldwidem-gustotvnz-samsungnz-3fu5q.amagi.tv/playlist/amg01077-gustoworldwidem-gustotvnz-samsungnz/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55e458b6cf4e71841882c47e1865fc8d54abb9ddd5dcd439b7fa0469dc6f48b8613d08f9401056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac6f1f661bbde1c59abe1c6186e6a1c4735ed32dc2bfd040a65e1adc/174/848x480_1686360/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Hallmark Channel East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/HALLMARK_CHANNEL/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Hallmark Drama",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/HALLMARK_DRAMA/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Hallmark Mysteries",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/HALLMARK_MOVIES_MYSTERIES/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Hardcore Pawn",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCmb86YrsCCGeZa4wU59YqGA"
+        },
+        {
+            "name": "Haunt TV alt (US)",
+            "type": "iptv",
+            "stream_url": "https://d1t7rfq3i08kdv.cloudfront.net/playlist/amg00090-blueantllc-haunttv-lgus/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55540df3df5b11d1b882c47e1d45fc8d54abb9d855c9a469b23f316959bf688d7418b839701056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac6b189e1b9024f2c525fe166a578e7dfca7ef0fcc044cfab5d9/133/426x240_511680/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Hells Kitchen",
+            "type": "iptv",
+            "stream_url": "https://itv-hellskitchen-rakuten.amagi.tv/240p/index.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Heritage+",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/e4523706-f2a8-4b0f-b081-40fe59a46f81/manifest.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "History Time (US)",
+            "type": "iptv",
+            "stream_url": "https://d2r3s0ud09vhe5.cloudfront.net/playlist/amg00090-blueantllc-historytime-lgus/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55411da68f4e0154c882c47e1d45fc8d54abb9ddd5bc8449b75a4479bc7a288d146d0869801056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873baf6eab1fcef97dae02e584fc2c67c0c587b37a9b3bf664b460/26/848x480_1686360/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "HomefulTV",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCXNLAoVVrQIw9EMzIjuLUZQ"
+        },
+        {
+            "name": "Hoop TV",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/WiseM3U8_28/sofast/cleanhls/Hoop_1000k.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Hoop TV 2",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/WiseM3U8_28/sofast/cleanhls/Hoop_1000k.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "How the Universe Works",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCu2QtA-3OIJoXdBZfHc3zRA"
+        },
+        {
+            "name": "I Shouldn't Be Alive",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCFSrAqP3S72YvPru-Ts9lcg"
+        },
+        {
+            "name": "ION Mystery",
+            "type": "iptv",
+            "stream_url": "https://scripps-ionmystery-1-us.xumo.wurl.tv/playlist_2000k.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Jail (US)",
+            "type": "iptv",
+            "stream_url": "https://langleyproductions-jail-1-us.lg.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Kapamilya Channel",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCstEtN0pgOmCf02EdXsGChw"
+        },
+        {
+            "name": "KBS WORLD Latino (KOR)",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC_vrqgb3YLoe2MYSJm2aO-A"
+        },
+        {
+            "name": "KBS WORLD TV (KOR)",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC5BMQOsAB8hKUyHu9KI6yig"
+        },
+        {
+            "name": "Kids TV (US)",
+            "type": "iptv",
+            "stream_url": "https://jansonmedia-kidstv-1-us.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Law&Crime Network",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCz8K1occVvDTYDfFo7N5EZw"
+        },
+        {
+            "name": "LiaChaCha - Nursery Rhymes & Baby Songs",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC1DY-gFnouXe065NMlLdvbA"
+        },
+        {
+            "name": "Lifetime Movies",
+            "type": "iptv",
+            "stream_url": "http://sapphireapp.xyz:8080/live/KatKN1Xzbu/0355235111/23292.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Lifetime Movies East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/LIFETIME_MOVIE_NETWORK/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "LIVE Dream Trips",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCetYFjkhf7S7LwiuJxeC28g"
+        },
+        {
+            "name": "LIVE DZMM Teleradyo",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCs_VNu-FQ0WcJnD4QkmIL5w"
+        },
+        {
+            "name": "LiveNOW from FOX",
+            "type": "iptv",
+            "stream_url": "https://d3ep1886oobtu.cloudfront.net/playlist/vizioAAAA-foxnewsnow-vizio/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55817dc6ca4e7151a882c47e0835fc8d54abb9ddd089a479b7ff345cec0a4da8118d3879101056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873ba968ab1fdbf77dae02ea9d094d26ca136c14395161e92dda25/40/426x240_499400/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Love Story Music",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC-BpF8FT5dQU9V2IDxmFQPw"
+        },
+        {
+            "name": "Lovestories TV (EU)",
+            "type": "iptv",
+            "stream_url": "https://lovestoriestv-lovestoriestv-1-eu.xiaomi.wurl.tv/1200.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Made In History",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCFn4wt14ytUbngBJp8SsWKQ"
+        },
+        {
+            "name": "Marvel HQ",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCxwitsUVNzwS5XBSC5UQV8Q"
+        },
+        {
+            "name": "Mayday: Air Disaster",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCeRxxz9ByOqdd8A-0iF_Idg"
+        },
+        {
+            "name": "Military History",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/Military_History/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "MIRROR NOW",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCWCEYVwSqr7Epo6sSCfUgiw"
+        },
+        {
+            "name": "MMA Futures",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCpA-cpQ4WbpgRwwDk2Q6osg"
+        },
+        {
+            "name": "Mobile Legends: Bang Bang",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCqmld-BIYME2i_ooRTo1EOg"
+        },
+        {
+            "name": "MoreU (US)",
+            "type": "iptv",
+            "stream_url": "https://bec-moreu-1-us.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Movie Favorites by Lifetime",
+            "type": "iptv",
+            "stream_url": "https://5ee29b66.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/Vml6aW9fSG9saWRheU1vdmllRmF2b3JpdGVzYnlMaWZldGltZV9ITFM/playlist.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "MovieDome",
+            "type": "iptv",
+            "stream_url": "https://amg00771-kochfilmsgerman-moviedome-xiaomi-v1ph9.amagi.tv/playlist/amg00771-kochfilmsgerman-moviedome-xiaomi/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55e408e68f3e71440882c47e1845fc8d54abb9d860fcc4b9b20a446cf94f58bd74381d79101056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac6a1e661bbde1e1a1be1c612b2af246281637c97bb6b0139b565f09/125/848x480_1686360/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Movies!",
+            "type": "iptv",
+            "stream_url": "https://dvrfl03.bozztv.com/hdirect/hdirect-ovair1-movies!/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Moviespher 4",
+            "type": "iptv",
+            "stream_url": "https://moviesphereuk-samsunguk.amagi.tv/360p-vtt/index.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "MovieSphere",
+            "type": "iptv",
+            "stream_url": "https://moviesphereuk-samsunguk.amagi.tv/480p-vtt/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Mr Bean",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCkAGrHCLFmlK3H2kd6isipg"
+        },
+        {
+            "name": "MSG",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/MSG/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "MTV 2",
+            "type": "iptv",
+            "stream_url": "https://fl5.moveonjoy.com/MTV_2/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "MTV Classic East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/MTV_CLASSIC/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "MTV East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/MTV/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "MTV Live",
+            "type": "iptv",
+            "stream_url": "https://fl5.moveonjoy.com/MTV_LIVE/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "MTV U",
+            "type": "iptv",
+            "stream_url": "https://fl5.moveonjoy.com/MTV_U/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Museum TV Fast",
+            "type": "iptv",
+            "stream_url": "https://amg01492-secomsasmediart-museumtv-en-plex-abtzr.amagi.tv/playlist/amg01492-secomsasmediart-museumtv-en-plex/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55942dc6ba3b81948882c47e0805fc8d54abb9d855d9a429b25f3159b93f48fd01984869201056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873ba96a531f9a3c2da299e2db9fba4339c0128496eedf08506555e969/42/848x480_1249600/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Mystery TV",
+            "type": "iptv",
+            "stream_url": "https://aenetworks-mysterytv-rakuten.amagi.tv/360p-vtt/index.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Mythbusters",
+            "type": "iptv",
+            "stream_url": "https://amg00627-amg00627c14-rakuten-uk-4802.playouts.now.amagi.tv/240p/index.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Mytime Movie Network",
+            "type": "iptv",
+            "stream_url": "https://livetv-fa.tubi.video/my-time/playlistR360p.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Mytime Movie Network (US)",
+            "type": "iptv",
+            "stream_url": "https://d265rcsqdko5cg.cloudfront.net/playlist/amg00500-studiocitypictu-mytime-lgus/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55c41db6df7b71d1d882c47e1d45fc8d54abb9d860a9e439b25f341c8c4f98b8718d08f9801056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873ba961ab1ff5ff7dae022c1bc4835c704475e291bcc61e549659/49/426x240_511680/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Nat Geo Animals",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCDPk9MG2RexnOMGTD-YnSnA"
+        },
+        {
+            "name": "National Geographic",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCpVm7bg6pXKo1Pr6k5kxG9A"
+        },
+        {
+            "name": "National Geographic 2",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/National_Geographic/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "National Geographic HD",
+            "type": "iptv",
+            "stream_url": "http://mu3241218.oknirvana.club:8880//live/AZ12M3D074/GpWZ6JkAZZ/3020.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "National Geographic Wild East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/Nat_Geo_Wild/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Nature Lover",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCRZPkuHwaoKwTP3CYPdVldg"
+        },
+        {
+            "name": "Nature Time",
+            "type": "iptv",
+            "stream_url": "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00090-blueantmedia-naturetime-samsungfr/playlist.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "NBA TV",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/NBA_TV/index.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "New Kmovies",
+            "type": "iptv",
+            "stream_url": "https://ec3b4b7e.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X05FV0tNT1ZJRVNfSExT/playlist.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "NEW KPOP (EU)",
+            "type": "iptv",
+            "stream_url": "https://newidco-newkid-1-eu.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Nick Jr. East",
+            "type": "iptv",
+            "stream_url": "https://fl5.moveonjoy.com/NICK_JR/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Nick Music",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/NICK_MUSIC/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Nickelodeon East",
+            "type": "iptv",
+            "stream_url": "https://fl1.moveonjoy.com/NICKELODEON/tracks-v1a1/mono.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Nicktoons",
+            "type": "iptv",
+            "stream_url": "https://fl1.moveonjoy.com/NICKTOONS/tracks-v1a1/mono.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Ninja Kidz TV (EU)",
+            "type": "iptv",
+            "stream_url": "https://playworksdigital-ninjakidztv-1-eu.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Now 70s",
+            "type": "iptv",
+            "stream_url": "https://lightning-now70s-xiaomi.amagi.tv/playlist480p.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Now 80s",
+            "type": "iptv",
+            "stream_url": "https://lightning-now80s-xiaomi.amagi.tv/playlist480p.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Now 90s",
+            "type": "iptv",
+            "stream_url": "https://lightning-now90s-xiaomi.amagi.tv/playlist480p.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Outdoor Action (EU)",
+            "type": "iptv",
+            "stream_url": "https://careco-outdoor-action-1-eu.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Outdoor Channel",
+            "type": "iptv",
+            "stream_url": "https://amg00718-outdoorchannela-outdoortvnz-samsungnz-lylq4.amagi.tv/ts-eu-w1-n2/playlist/amg00718-outdoorchannela-outdoortvnz-samsungnz/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55b478a69a4e01b40882c47e0805fc8d54abb9ddd5cca179b25a445c892f58b811185d4c201056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873bae6aab1fe1f07dae023ce5d53b0694ed703a683ee30e5de4d4/32/960x540_1284536/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Oxygen: True Crime",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/OXYGEN/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Paramount Network East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/PARAMOUNT_NETWORK/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "PAW Patrol Official & Friends",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCSVSJ1OCSv5ClFgKFTHIDew"
+        },
+        {
+            "name": "People Are Awesome",
+            "type": "iptv",
+            "stream_url": "https://jukin-peopleareawesome-2-ca.samsung.wurl.tv/playlist.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Peppa Pig's Pretend Play",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCoCSjc-4JCGqOxuhuw-xjSw"
+        },
+        {
+            "name": "Pluto TV: Lovestories",
+            "type": "iptv",
+            "stream_url": "https://84e619480232400a842ce499d053458a.mediatailor.us-east-1.amazonaws.com/v1/master/04fd913bb278d8775298c26fdca9d9841f37601f/ONO_LoveStoriesTV/playlist.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Power Rangers Kids - Official Channel",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCbIm2iqwql8bFqkO2bHv7Mw"
+        },
+        {
+            "name": "Power Rangers Official",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCpgxmlXoDtkYzRQ4cJgCT5A"
+        },
+        {
+            "name": "PowerNation",
+            "type": "iptv",
+            "stream_url": "https://amg01258-raycom-amg01258c1-xiaomi-international-907.playouts.now.amagi.tv/playlist/amg01258-raycomsportsfast-powernation-xiaomiinternational/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf50913db64f7b01940882c47e0815fc8d54abb9d865a9c129b72f71294c1f382d615d7839501056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873ba46e531f9a3c19bd99e2db90e1141e089ea353f2d3aad402c8c30e/96/426x240_511680/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Progress - Science Documentaries",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCsvOKiFRXrG1AvfSo2RUZKQ"
+        },
+        {
+            "name": "ProStat Sports",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCFxj9pe7sZ-yjWElYO5ZDdA"
+        },
+        {
+            "name": "Racing America",
+            "type": "iptv",
+            "stream_url": "https://livetv-fa.tubi.video/racing-america/playlistR240p.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Radio Mix",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCCTVoz8uUBKn4TUKntJacng"
+        },
+        {
+            "name": "Rakuten Viki (EU)",
+            "type": "iptv",
+            "stream_url": "https://newidco-rakutenviki-2-eu.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Real Crime",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC1s9576cQFdQq3QTtTxocmA"
+        },
+        {
+            "name": "Real Disaster Channel",
+            "type": "iptv",
+            "stream_url": "https://linear-475.frequency.stream/dist/glewedtv/475/hls/master/playlist_640x360.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Real Responders",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCbMJuChLfqeXCgEmmciKZxA"
+        },
+        {
+            "name": "Reelz",
+            "type": "iptv",
+            "stream_url": "https://bcovlive-a.akamaihd.net/rc21a8bc6455344c699a06e9220fe2748/us-west-2/us-west-2/5245389775001/profile_2/chunklist.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Rush NZ",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCCfrC8pO_GxBO_29C6r1a3g"
+        },
+        {
+            "name": "Saga Music (Asia)",
+            "type": "iptv",
+            "stream_url": "https://amg01412-xiaomiasia-sagamusic-xiaomi-h54ye.amagi.tv/ts-eu-w1-n2/playlist/amg01412-xiaomiasia-sagamusic-xiaomi/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55540d06af5e21b19882c47e1875fc8d54abb9d8509cf129b71f7409f9ba5d9da12878ec401056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac691b9e1bdb42f2c525186fefccf42f8de091f11ac6bbdb3074/110/320x180_498024/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Save Earth Now",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCu_0BEjiiyYLxCnFCZ93Zgw"
+        },
+        {
+            "name": "Scares By Shudder",
+            "type": "iptv",
+            "stream_url": "https://amc-scaresbyshudder-1-us.xumo.wurl.tv/1200.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Scifi World",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/a985e052-6868-4365-ac45-52afe9008b25/f5105fbd-8838-4901-a80e-6f2672140a32/0.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Showtime East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/SHOWTIME/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Showtime East 2",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/SHOWTIME_2/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Showtime Next East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/SHOWTIME_NEXT/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Showtime West",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/SHOWTIME_WEST/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Showtime Women East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/SHOWTIME_WOMEN/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Sony AXN",
+            "type": "iptv",
+            "stream_url": "https://srfs.akamaized.net/hls/live/689649-b/srfsgeo/master-720p-3328.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Space Series",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/18d329ef-d478-413c-b68f-c123494ac434/a8cb24d1-5054-4f6d-8ca9-2534974a6095/0.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Spacedust",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCuPkgKp2-9zMuVIr-eAFjyw"
+        },
+        {
+            "name": "Spark",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCMV3aTOwUtG5vwfH9_rzb2w"
+        },
+        {
+            "name": "SpongeBob SquarePants Official",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCx27Pkk8plpiosF14qXq-VA"
+        },
+        {
+            "name": "Sports Grid",
+            "type": "iptv",
+            "stream_url": "https://amg00315-sportsgrid-sportsgrid-xiaomi-p0u9g.amagi.tv/playlist/amg00315-sportsgrid-sportsgrid-xiaomi/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf555448b39a9b11f1b882c47e0865fc8d54abb9d86539a449b70f3469f93f68a8010d681c301056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac6b13661bbde1e5d1be1c61cb4fc9f51cbedd5eab682d6a8e728400/138/848x480_1230780/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Sportsman Channel",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/SPORTSMAN_CHANNEL/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Sportsnet New York",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/SNY/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Starz East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/STARZ/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Starz Encore Classic",
+            "type": "iptv",
+            "stream_url": "https://fl5.moveonjoy.com/STARZ_ENCORE_CLASSIC/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Starz West",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/STARZ_WEST/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Story Television",
+            "type": "iptv",
+            "stream_url": "https://2-fss-1.streamhoster.com/pl_122/206858-4412976-1/chunklist.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Strongmans Champion League (EU)",
+            "type": "iptv",
+            "stream_url": "https://rightsboosterltd-scl-1-eu.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Super Wings (US)",
+            "type": "iptv",
+            "stream_url": "https://jansonmedia-superwings-1-us.lg.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Swerve Combat alt",
+            "type": "iptv",
+            "stream_url": "https://linear-253.frequency.stream/dist/glewedtv/253/hls/master/playlist_640x360.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Syfy East",
+            "type": "iptv",
+            "stream_url": "https://fl3.moveonjoy.com/SYFY/tracks-v1a1/mono.ts.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Talking Tom & Friends TV",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCDCNmuaOXOo25Yn4mbMHhhQ"
+        },
+        {
+            "name": "TED Conferences (US)",
+            "type": "iptv",
+            "stream_url": "https://tedconferences-ted-1-us.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Teletubbies - WildBrain",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCOk55dAgB8VnMlhaTEMeX5A"
+        },
+        {
+            "name": "The Asylum Movie Channel",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCwQJJVNbn_Tqze89xf83nhw"
+        },
+        {
+            "name": "The Hill (US)",
+            "type": "iptv",
+            "stream_url": "https://dhr5ahb4n4szr.cloudfront.net/playlist/amg01312-nexstarmediagro-thehill-lgus/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55f428d3da0b14e1e882c47e1d45fc8d54abb9ddc09cc429b76a416ce96f68d8743d7809701056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873ba56dab1f8afe7dae02ab479e8e884bd8443116f10860785b34/85/720x404_1478400/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "The Island with Bear Grylls",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC1Sf1QkXyTNdMiJ_jtIRXhQ"
+        },
+        {
+            "name": "THE K-POP",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCoRXPcv8XK5fAplLbk9PTww"
+        },
+        {
+            "name": "The Universe & Space",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCKv3UT62zZgBWeZ4j8gpkjg"
+        },
+        {
+            "name": "Timeline",
+            "type": "iptv",
+            "stream_url": "https://cdn-apse1-prod.tsv2.amagi.tv/linear/amg00426-littledotstudio-timelinenz-samsungnz/playlist.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Timeline - World History Documentaries",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC88lvyJe7aHZmcvzvubDFRg"
+        },
+        {
+            "name": "TMZ",
+            "type": "iptv",
+            "stream_url": "https://apollo.production-public.tubi.io/live/ac-tmz.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "TMZ (US)",
+            "type": "iptv",
+            "stream_url": "https://d138zshxk04l3j.cloudfront.net/playlist/amg00488-foxdigital-tmz-lgus/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf55b4ddd6bf3e5491a882c47e1d45fc8d54abb9d855b97429b22a41c9e9bf283d0438285c001056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac6b1c9e1bc123f2c5253a46b22165deff1816cc36fae4dd5711/137/1280x720_3000140/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Top Gear Classic",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCx6xmIOXqnQ79ZI6VVpARXw"
+        },
+        {
+            "name": "Top Song 2025",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC7U1emO4YvnX_A3oXV6Z6cA"
+        },
+        {
+            "name": "Total Crime",
+            "type": "iptv",
+            "stream_url": "https://aegis-cloudfront-1.tubi.video/0c770ac6-72a3-4618-aed4-4518a19df0d5/240p-cc/index.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Total Drama Official",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCaf_hcOZous_DNct6xmc-Ow"
+        },
+        {
+            "name": "Total Nonstop Action",
+            "type": "iptv",
+            "stream_url": "https://a-cdn.klowdtv.com/live2/tna_720p/chunks.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "TRANSFORMERS OFFICIAL",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCx7b66RpQRLuOXvItxy0Wxg"
+        },
+        {
+            "name": "Transformers TV",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC3lxPjuIiHgRubQsJqhGeEA"
+        },
+        {
+            "name": "Travel XP (EU)",
+            "type": "iptv",
+            "stream_url": "https://travelxp-travelxp-1-eu.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Trending Songs 2025",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC_NxEsnAPRge03hcS-UuWyQ"
+        },
+        {
+            "name": "True Crime ABC",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCL8IYo6lwf0H4kW4Gi-eq3Q"
+        },
+        {
+            "name": "True History",
+            "type": "iptv",
+            "stream_url": "https://linear-188.frequency.stream/dist/glewedtv/188/hls/master/playlist_384x216.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "TVS Boxing",
+            "type": "iptv",
+            "stream_url": "https://bozztv.com/gusa/gusa-tvsboxing/tracks-v1a1/mono.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "UFC 1",
+            "type": "iptv",
+            "stream_url": "https://aegis-cloudfront-1.tubi.video/a78ea283-8666-44a1-a0f6-fde5d229ac21/playlist_640x360.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "UFC 2",
+            "type": "iptv",
+            "stream_url": "https://aegis-cloudfront-1.tubi.video/a78ea283-8666-44a1-a0f6-fde5d229ac21/playlist_webvtt.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Unearthed History - Archaeology Documentaries",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC11MjaCTJzTdTYhePzxNdRQ"
+        },
+        {
+            "name": "Universal Crime",
+            "type": "iptv",
+            "stream_url": "https://xumo-xumoent-vc-107-xmuvk.fast.nbcuni.com/live/master_6.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "UNTV News and Rescue",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UC3XaG-7UVi2vD8ZZEMNnnpw"
+        },
+        {
+            "name": "Voyages+",
+            "type": "iptv",
+            "stream_url": "https://streams2.sofast.tv/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/ff8d1526-e572-4bb5-8c93-560eb80115bf/8dee7955-7bf4-49e5-b666-c2427f98c84a/0.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Warner Bros. Classics",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCU0rIMU3k_AsVA8d6N1B03w"
+        },
+        {
+            "name": "Warner Bros. Entertainment",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCgKkNPU2Ib7_TcyAl8M2S-w"
+        },
+        {
+            "name": "Warner Bros. Rewind",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCsQQo8qb62ikp9kc954V7eQ"
+        },
+        {
+            "name": "Watch Mojo (EU)",
+            "type": "iptv",
+            "stream_url": "https://watchmojo-1-eu.xiaomi.wurl.tv/192.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Waypoint TV",
+            "type": "iptv",
+            "stream_url": "https://waypoint-waypointtv-firetv.amagi.tv/240p-cc/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Whoa That Was Wild (EU)",
+            "type": "iptv",
+            "stream_url": "https://newsflare-whoathatwaswild-1-eu.xiaomi.wurl.tv/2000.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Wipeout Xtra",
+            "type": "iptv",
+            "stream_url": "https://amg00627-banijaygroup-wipeoutxtra-vizious-w8ctk.amagi.tv/playlist/amg00627-banijaygroup-wipeoutxtra-vizious/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf50b458d3ef5b74f4c882c47e0825fc8d54abb9ddd5d9e479b7ef7409e90a289d0468586c301056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac6b18661bbde1e1cdbe1c617ef72cb1eda9cf614b7be102edbe7710/133/848x480_1686360/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Womens Network",
+            "type": "iptv",
+            "stream_url": "https://womensnetwork-lg.amagi.tv/playlist480p.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Xplore TV",
+            "type": "iptv",
+            "stream_url": "https://amg00111-hearstmediaprod-xploreintlnl-samsungnl-rx86v.amagi.tv/playlist/amg00111-hearstmediaprod-xploreintlnl-samsungnl/cb553d1c7f6c648e9dd43e61d3ef41a8dd243dfc087a8d6933fb4b926bc10f41e2e5af97b20cac7822fb0fdf61146d5a4d009247d8780ad7967cac48240d5734c6cdd52e8be24b4daddd0c2d34b07c0e49857671ad594f32d5e0110dc51ab07a0e1ca1494d5e2082b00cb27751c79e0a957f378bbdbe306f2c180680585ee2be5da5edf50e448d3ff5e4491e882c47e0805fc8d54abb9d860d9e469b24f3139893f9dd82168a8f9901056688416180f07ae3e249bb8b3686d29365308c6121481b4694ccf99c6f0ff68cc7c19a85af9e76f612b4f84d68eb3fc96bbb4e92399e6eea2aaef557e2d8d328aaea5ad6a60f315dcac6a186fa3732af7cf4acaba01b9b12fe661b64e85ba2501b2a9febc21a87c65599b063a6b57f142cc5db23f1f9e6d2bfe0df0bf421bbd8fe4429b1d62f247b904cd9f7ed8217fd32c3ef00285d0269ac945cc887e393510840ab8f44dd1f17b894decd8f4e73fd69155ee777ca1b2b588c653c32b576b9ad3562df7251c52d6baf1175a152ecb429c2a2d9ce0f2ffa8b9415b13cb9f542f9de36844170190ebaf9291f62497edbe12f4d1371d14ae9d685b0245b4ebcb99db090130b063f164005c4b7b427d5dd965b687cab642f6e701f0085448739ad6767346e984e9dfc7337ef600622e9a03358201cb5c0a38e8ad38a09f548dac1f93638281b049936162d7adca6873aac6a13661bbde1f5cbbe1c614c5cf32631191cc72f1ff42d9accc3e6/128/960x540_3043040/index.m3u8",
+            "youtube_channel_id": ""
+        },
+        {
+            "name": "Xumo TV: 50 Cent Action",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/d9c36135-c47e-4675-a937-df0cae66cf28/3.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: Baywatch",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/a3e6f8dc-d4de-4ae5-b25d-93481e2a2824/2.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: CNN Originals",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/4ae231bb-bc06-49d3-9186-f567d329e5a2/5.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: Combat War Channel",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/48196e7a-668b-4297-870a-77dcf7af416d/0.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: Cosmic Journeys",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/e6556a16-d459-4708-94a8-85716c8ff0e5/1.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: Curiosity Now",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/ce8b1ca2-ce0f-458b-9fcf-a14e51b4c4d9/3.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: Designated Survivor",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/cec52b1c-2543-4062-b1f0-106b420da657/1.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: ElectricNOW",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/b152f50f-3cb7-4d9d-be25-ffa2c584705a/2.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: GET",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/a3e6f8dc-d4de-4ae5-b25d-93481e2a2824/2.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: How To",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/053281e8-4f91-4f0d-bd55-396f6b9e7578/5.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: Ion",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/45215269-f91b-472a-b4d2-0d793da3905a/2.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: Nash Bridges Channel",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/81175e31-f399-440f-b395-9147c40d6326/2.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: Stories by AMC",
+            "type": "iptv",
+            "stream_url": "https://d3pxo1qcgzxtxs.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-linear-amc-hlsv3/7f8a8b0b-86d6-45e0-92c7-dde5296434e8/4.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: True History Channel",
+            "type": "iptv",
+            "stream_url": "https://dbrb49pjoymg4.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/e6556a16-d459-4708-94a8-85716c8ff0e5/1.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: Universal Action",
+            "type": "iptv",
+            "stream_url": "https://d4whmvwm0rdvi.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-nbcu-linear/162d70f5-f722-42e0-9378-5ac0eb19f445/6.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "Xumo TV: Xumo Free Action & Drama TV",
+            "type": "iptv",
+            "stream_url": "https://live-content.xumo.com/3790/content/XM0SVSC6SGZ46V/26783087/5.m3u8",
+            "youtube_channel_id": null
+        },
+        {
+            "name": "YT: Court Tv",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCo5E9pEhK_9kWG7-5HHcyRg"
+        },
+        {
+            "name": "YT: LiveNOW from FOX",
+            "type": "youtube",
+            "stream_url": null,
+            "youtube_channel_id": "UCJg9wBPyKMNA5sRDnvzmkdg"
+        }
+    ]
 }
