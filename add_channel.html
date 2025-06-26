@@ -7,14 +7,15 @@
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
   <style>
-    body { font-family:sans-serif; background:#f4f4f4; padding:20px; }
-    .container { max-width:600px; margin:auto; background:white; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
-    h2 { margin-top:0; }
-    label { display:block; margin-top:10px; font-weight:bold; }
-    input, select, button { width:100%; padding:10px; margin-top:5px; }
-    video, iframe { width:100%; height:300px; margin-top:20px; display:none; background:#000; }
-    #result { margin-top:10px; font-weight:bold; color:green; }
-    #error { color:red; }
+    body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { margin-top: 0; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select, button { width: 100%; padding: 10px; margin-top: 5px; }
+    video, iframe { width: 100%; height: 300px; margin-top: 20px; display: none; background: #000; }
+    #result { margin-top: 10px; font-weight: bold; color: green; }
+    #error { margin-top: 10px; color: red; font-weight: bold; }
+    .loading { color: #333; font-style: italic; }
   </style>
 </head>
 <body>
@@ -42,7 +43,7 @@
 
     <video id="videoPlayer" controls autoplay muted></video>
     <div id="ytPlayerContainer" style="display:none;">
-      <iframe id="ytPlayer" frameborder="0" allowfullscreen></iframe>
+      <iframe id="ytPlayer" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
   </div>
 
@@ -52,13 +53,13 @@
     const video = document.getElementById('videoPlayer');
     const ytContainer = document.getElementById('ytPlayerContainer');
     const ytIframe = document.getElementById('ytPlayer');
+    const result = document.getElementById('result');
+    const error = document.getElementById('error');
 
     testBtn.addEventListener('click', () => {
       const name = document.getElementById('channelName').value.trim();
       const type = document.getElementById('channelType').value;
       const link = document.getElementById('channelLink').value.trim();
-      const result = document.getElementById('result');
-      const error = document.getElementById('error');
 
       result.textContent = '';
       error.textContent = '';
@@ -70,9 +71,12 @@
       video.src = '';
 
       if (!name || !link) {
-        error.textContent = "Please fill in all fields.";
+        error.textContent = "❌ Please fill in all fields.";
         return;
       }
+
+      result.textContent = '⏳ Testing stream...';
+      result.classList.add('loading');
 
       if (type === 'm3u8') {
         video.style.display = 'block';
@@ -81,37 +85,52 @@
           hls.loadSource(link);
           hls.attachMedia(video);
           hls.on(Hls.Events.MANIFEST_PARSED, () => {
-            result.textContent = '✅ Stream working!';
+            result.textContent = '✅ M3U8 stream working!';
+            result.classList.remove('loading');
             submitBtn.disabled = false;
           });
-          hls.on(Hls.Events.ERROR, function (event, data) {
-            error.textContent = "❌ Error: " + data.details;
+          hls.on(Hls.Events.ERROR, (_, data) => {
+            result.classList.remove('loading');
+            error.textContent = "❌ HLS error: " + (data.details || 'Unknown error');
           });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
           video.src = link;
           video.addEventListener('loadedmetadata', () => {
-            result.textContent = '✅ Stream working!';
+            result.textContent = '✅ M3U8 stream working!';
+            result.classList.remove('loading');
             submitBtn.disabled = false;
           });
         } else {
-          error.textContent = "HLS not supported.";
+          result.classList.remove('loading');
+          error.textContent = "❌ HLS not supported by this browser.";
         }
+
       } else if (type === 'mpd') {
         video.style.display = 'block';
         const player = dashjs.MediaPlayer().create();
         player.initialize(video, link, true);
-        player.on('playbackPlaying', () => {
-          result.textContent = '✅ Stream working!';
+        player.on('manifestLoaded', () => {
+          result.textContent = '✅ DASH stream working!';
+          result.classList.remove('loading');
           submitBtn.disabled = false;
         });
-        player.on('error', e => {
-          error.textContent = "❌ Stream error";
+        player.on('error', () => {
+          result.classList.remove('loading');
+          error.textContent = "❌ MPEG-DASH stream error";
         });
+
       } else if (type === 'youtube') {
         ytContainer.style.display = 'block';
         ytIframe.src = `https://www.youtube.com/embed/live_stream?channel=${link}&autoplay=1`;
-        result.textContent = '✅ Check if YouTube Live appears.';
-        submitBtn.disabled = false;
+        ytIframe.onload = () => {
+          result.textContent = '✅ YouTube Live embedded. Check stream visibility.';
+          result.classList.remove('loading');
+          submitBtn.disabled = false;
+        };
+        ytIframe.onerror = () => {
+          result.classList.remove('loading');
+          error.textContent = "❌ Failed to load YouTube Live stream.";
+        };
       }
     });
 
@@ -119,8 +138,6 @@
       const type = document.getElementById('channelType').value;
       const name = document.getElementById('channelName').value.trim();
       const link = document.getElementById('channelLink').value.trim();
-      const result = document.getElementById('result');
-      const error = document.getElementById('error');
 
       let payload = {
         name: name,
@@ -142,12 +159,12 @@
           document.getElementById('channelLink').value = '';
           submitBtn.disabled = true;
         } else {
-          error.textContent = '❌ Error: ' + (data.message || 'Unknown error');
+          error.textContent = '❌ Save error: ' + (data.message || 'Unknown issue');
         }
       })
       .catch(err => {
         console.error(err);
-        error.textContent = '❌ Network or server error';
+        error.textContent = '❌ Network error while saving.';
       });
     });
   </script>
