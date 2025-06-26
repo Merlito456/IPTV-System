@@ -182,13 +182,13 @@
     };
 
     function loadChannels() {
-      fetch('https://script.google.com/macros/s/AKfycbxDKD8gsgETJCSfxe1P1N38QLUrHNWbbvXRE4ZwkeBl86W5ZYVG4WogMMus8rcIAMzA/exec')
+      fetch('https://vipstreaming.zya.me/external/channels.json')
         .then(r => r.json())
         .then(data => {
           const iptv = $('#iptv-list').empty();
           const yt = $('#youtube-list').empty();
-          if (Array.isArray(data)) {
-            data.forEach(ch => {
+          if (Array.isArray(data.channels)) {
+            data.channels.forEach(ch => {
               if (ch.stream_url) {
                 iptv.append(`<div class="channel-item" data-type="iptv" data-stream="${encodeURI(ch.stream_url)}">${ch.name}</div>`);
               } else if (ch.youtube_channel_id) {
@@ -217,7 +217,7 @@
     window.onload = () => {
       showOverlay('📡 Checking default YouTube channel...');
       showNoise(true);
-      loadYouTubeLive('UCLA_DiR1FfKNvjuUpBHmylQ'); // NASA
+      loadYouTubeLive('UCLA_DiR1FfKNvjuUpBHmylQ'); // Default NASA Live
       loadChannels();
     };
   </script>
