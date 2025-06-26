@@ -105,7 +105,7 @@
   <a id="admin-link" href="add_channel.php">➕ Add Channel</a>
 
   <script>
-    let hls = null, ytPlayer = null, ytApiLoaded = false, pendingVideoId = null;
+    let hls = null;
 
     function showOverlay(text) { $('#overlay').text(text).show(); }
     function hideOverlay() { $('#overlay').hide(); }
@@ -113,7 +113,6 @@
 
     function clearVideo() {
       if (hls) { hls.destroy(); hls = null; }
-      if (ytPlayer && ytPlayer.destroy) { ytPlayer.destroy(); ytPlayer = null; }
       $('#video-area').find('video, #yt-player').remove();
     }
 
@@ -142,15 +141,14 @@
         .then(r => r.json())
         .then(data => {
           if (data.liveVideoId) {
-            pendingVideoId = data.liveVideoId;
-            if (!ytApiLoaded) {
-              const tag = document.createElement('script');
-              tag.src = "https://www.youtube.com/iframe_api";
-              document.body.appendChild(tag);
-              ytApiLoaded = true;
-            } else {
-              createYTPlayer(pendingVideoId);
-            }
+            $('#video-area').append(`
+              <iframe id="yt-player"
+                      src="https://www.youtube.com/embed/${data.liveVideoId}?autoplay=1&mute=1&playsinline=1"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                      frameborder="0"></iframe>
+            `);
+            hideOverlay();
           } else {
             showOverlay('🔴 Channel not live');
             showNoise(true);
@@ -162,40 +160,23 @@
         });
     }
 
-    function createYTPlayer(videoId) {
-      $('<div id="yt-player">').appendTo('#video-area');
-      ytPlayer = new YT.Player('yt-player', {
-        height: '100%', width: '100%', videoId,
-        playerVars: { autoplay: 1, controls: 1, modestbranding: 1, rel: 0, playsinline: 1 },
-        events: {
-          onReady: e => { e.target.playVideo(); hideOverlay(); },
-          onError: () => showOverlay('❌ YouTube playback error')
-        }
-      });
-    }
-
-    window.onYouTubeIframeAPIReady = () => {
-      if (pendingVideoId) {
-        createYTPlayer(pendingVideoId);
-        pendingVideoId = null;
-      }
-    };
-
     function loadChannels() {
-      fetch('./channels.json')
+      fetch('./channels.json') // Same folder
         .then(r => r.json())
         .then(data => {
           const iptv = $('#iptv-list').empty();
           const yt = $('#youtube-list').empty();
-          const channels = Array.isArray(data.channels) ? data.channels : data;
-
-          channels.forEach(ch => {
-            if (ch.stream_url) {
-              iptv.append(`<div class="channel-item" data-type="iptv" data-stream="${encodeURI(ch.stream_url)}">${ch.name}</div>`);
-            } else if (ch.youtube_channel_id) {
-              yt.append(`<div class="channel-item" data-type="youtube" data-youtubeid="${ch.youtube_channel_id}">${ch.name}</div>`);
-            }
-          });
+          if (Array.isArray(data.channels)) {
+            data.channels.forEach(ch => {
+              if (ch.stream_url) {
+                iptv.append(`<div class="channel-item" data-type="iptv" data-stream="${encodeURI(ch.stream_url)}">${ch.name}</div>`);
+              } else if (ch.youtube_channel_id) {
+                yt.append(`<div class="channel-item" data-type="youtube" data-youtubeid="${ch.youtube_channel_id}">${ch.name}</div>`);
+              }
+            });
+          } else {
+            alert("❌ Invalid channel data");
+          }
         })
         .catch(() => alert('❌ Failed to load channels'));
     }
@@ -215,7 +196,7 @@
     window.onload = () => {
       showOverlay('📡 Checking default YouTube channel...');
       showNoise(true);
-      loadYouTubeLive('UCLA_DiR1FfKNvjuUpBHmylQ'); // Default: NASA Live
+      loadYouTubeLive('UCLA_DiR1FfKNvjuUpBHmylQ'); // Default NASA Live
       loadChannels();
     };
   </script>
