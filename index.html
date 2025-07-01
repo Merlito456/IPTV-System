@@ -44,6 +44,14 @@
       padding: 10px 15px; border: none; border-radius: 5px;
       cursor: pointer;
     }
+    #nav-buttons {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+    }
   </style>
 </head>
 
@@ -51,7 +59,14 @@
   <div class="tv-container">
     <div id="video-area">
       <div id="overlay">Choose Channel to play</div>
+
+      <!-- Next/Prev Buttons -->
+      <div id="nav-buttons">
+        <button id="prevChannel" class="btn">⏮ Prev</button>
+        <button id="nextChannel" class="btn">⏭ Next</button>
+      </div>
     </div>
+
     <div id="channel-panel">
       <div class="section-header" data-target="iptv-list">📺 IPTV Channels</div>
       <div id="iptv-list" class="section-content expanded"></div>
@@ -66,13 +81,17 @@
 
   <script>
     let hls = null;
+    let iptvChannels = [];
+    let currentChannelIndex = -1;
 
     function showOverlay(text) {
       $('#overlay').text(text).show();
     }
+
     function hideOverlay() {
       $('#overlay').hide();
     }
+
     function clearVideo() {
       if (hls) { hls.destroy(); hls = null; }
       $('#video-area').find('video, iframe').remove();
@@ -114,18 +133,29 @@
       hideOverlay();
     }
 
+    function playChannelByIndex(index) {
+      if (iptvChannels.length === 0) return;
+      if (index < 0) index = iptvChannels.length - 1;
+      if (index >= iptvChannels.length) index = 0;
+      currentChannelIndex = index;
+      const channel = iptvChannels[currentChannelIndex];
+      playIPTV(channel.stream_url);
+    }
+
     function loadChannels() {
       fetch('./channels.json')
         .then(response => response.json())
         .then(data => {
           const iptv = $('#iptv-list').empty();
           const yt = $('#youtube-list').empty();
+          iptvChannels = [];
 
           if (Array.isArray(data.channels)) {
-            data.channels.forEach(ch => {
+            data.channels.forEach((ch, i) => {
               const name = ch.name || "Unnamed Channel";
               if (ch.stream_url) {
-                iptv.append(`<div class="channel-item" data-type="iptv" data-stream="${ch.stream_url}">${name}</div>`);
+                iptvChannels.push(ch);
+                iptv.append(`<div class="channel-item" data-type="iptv" data-index="${iptvChannels.length - 1}" data-stream="${ch.stream_url}">${name}</div>`);
               } else if (ch.youtube_channel_id) {
                 yt.append(`<div class="channel-item" data-type="youtube" data-youtubeid="${ch.youtube_channel_id}">${name}</div>`);
               }
@@ -141,8 +171,12 @@
 
     $('#channel-panel').on('click', '.channel-item', function () {
       const type = $(this).data('type');
-      if (type === 'iptv') playIPTV($(this).data('stream'));
-      else playYouTube($(this).data('youtubeid'));
+      if (type === 'iptv') {
+        currentChannelIndex = parseInt($(this).data('index'));
+        playIPTV($(this).data('stream'));
+      } else {
+        playYouTube($(this).data('youtubeid'));
+      }
     });
 
     $('.section-header').click(function () {
@@ -150,6 +184,8 @@
     });
 
     $('#toggle-panel').click(() => $('#channel-panel').toggleClass('hidden'));
+    $('#nextChannel').click(() => playChannelByIndex(currentChannelIndex + 1));
+    $('#prevChannel').click(() => playChannelByIndex(currentChannelIndex - 1));
 
     window.onload = () => {
       showOverlay("📡 Loading channels...");
