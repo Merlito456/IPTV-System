@@ -1,4 +1,99 @@
-<script>
+<?php
+// index.php
+?><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online TV</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%; background: #000;
+      font-family: 'Share Tech Mono', monospace; overflow: hidden;
+    }
+    .tv-container {
+      display: flex; height: 100vh;
+    }
+    #video-area {
+      flex: 1; background: #000;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    video, iframe {
+      width: 100%; height: 100%; object-fit: contain;
+    }
+    #overlay {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; display: flex;
+      align-items: center; justify-content: center;
+      color: #fff; font-size: 24px;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    #channel-panel {
+      width: 300px; background: #111; color: #fff; overflow-y: auto;
+    }
+    .section-header {
+      padding: 10px; background: #222; font-weight: bold;
+      cursor: pointer; border-bottom: 1px solid #333;
+    }
+    .section-content {
+      display: none; flex-direction: column;
+    }
+    .section-content.expanded {
+      display: flex;
+    }
+    .channel-item {
+      padding: 10px; border-bottom: 1px solid #333; cursor: pointer;
+      color: #00FF00; font-family: 'Share Tech Mono', monospace;
+    }
+    .channel-item:hover {
+      background: #333;
+    }
+    #controls {
+      position: absolute; top: 10px; left: 10px; z-index: 10;
+    }
+    .btn {
+      background: rgba(0, 0, 0, 0.7); color: #fff;
+      padding: 10px 15px; border: none; border-radius: 5px;
+      cursor: pointer;
+    }
+    #channel-info {
+      position: absolute; top: 10px; left: 60px;
+      color: #00FF00; font-size: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 8px 15px; border-radius: 8px;
+      z-index: 10; font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 1px; box-shadow: 0 0 10px #00ff00;
+    }
+    #nav-buttons {
+      position: absolute; bottom: 10px; right: 10px; z-index: 10;
+    }
+    #nav-buttons .btn {
+      margin-left: 10px; font-size: 18px; padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="tv-container">
+  <div id="video-area">
+    <div id="overlay">📡 Choose Channel to play</div>
+    <div id="channel-info">Waiting for channel...</div>
+  </div>
+  <div id="channel-panel">
+    <div class="section-header" data-target="iptv-list">📺 IPTV Channels</div>
+    <div id="iptv-list" class="section-content expanded"></div>
+    <div class="section-header" data-target="youtube-list">🎥 YouTube Live Channels</div>
+    <div id="youtube-list" class="section-content"></div>
+  </div>
+</div><div id="controls">
+  <button class="btn" id="toggle-panel">☰</button>
+</div>
+<div id="nav-buttons">
+  <button class="btn" id="prev-channel">⏮ Prev</button>
+  <button class="btn" id="next-channel">⏭ Next</button>
+</div><script>
   let hls = null;
   let channelList = [];
   let currentIndex = -1;
@@ -11,7 +106,6 @@
     localStorage.setItem("lastChannelIndex", currentIndex);
   }
 
-  // Update time every second
   setInterval(() => {
     if (currentIndex >= 0 && currentIndex < channelList.length) {
       updateChannelInfo(channelList[currentIndex].name);
@@ -76,7 +170,6 @@
         allow="autoplay; encrypted-media"
         allowfullscreen
         frameborder="0"></iframe>`).appendTo('#video-area');
-
     hideOverlay();
     updateChannelInfo(name);
   }
@@ -102,7 +195,6 @@
             }
           });
 
-          // Auto-play last played channel
           const saved = localStorage.getItem("lastChannelIndex");
           if (saved !== null && !isNaN(saved)) {
             playChannel(parseInt(saved));
@@ -133,4 +225,5 @@
     showOverlay("📡 Loading channels...");
     loadChannels();
   };
-</script>
+</script></body>
+</html>
