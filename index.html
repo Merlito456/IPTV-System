@@ -6,7 +6,6 @@
   <title>Online TV</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script src="channels.js"></script> <!-- load channels from JS file -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     html, body {
@@ -161,24 +160,34 @@
     const yt = $('#youtube-list').empty();
     channelList = [];
 
-    if (Array.isArray(channels.channels)) {
-      channels.channels.forEach((ch, i) => {
-        const name = ch.name || "Unnamed Channel";
-        const index = channelList.length;
-
-        if (ch.stream_url) {
-          channelList.push({ name, stream_url: ch.stream_url });
-          iptv.append(`<div class="channel-item" data-index="${index}">${name}</div>`);
-        } else if (ch.youtube_channel_id) {
-          channelList.push({ name, youtube_channel_id: ch.youtube_channel_id });
-          yt.append(`<div class="channel-item" data-index="${index}">${name}</div>`);
+    fetch('channels.json')
+      .then(res => res.json())
+      .then(data => {
+        if (!Array.isArray(data.channels)) {
+          showOverlay("❌ Invalid channel list");
+          return;
         }
-      });
 
-      const lastIndex = parseInt(localStorage.getItem('lastPlayedIndex'));
-      if (!isNaN(lastIndex)) playChannel(lastIndex);
-      else playChannel(0);
-    }
+        data.channels.forEach((ch, i) => {
+          const name = ch.name || "Unnamed Channel";
+          const index = channelList.length;
+
+          if (ch.stream_url) {
+            channelList.push({ name, stream_url: ch.stream_url });
+            iptv.append(`<div class="channel-item" data-index="${index}">${name}</div>`);
+          } else if (ch.youtube_channel_id) {
+            channelList.push({ name, youtube_channel_id: ch.youtube_channel_id });
+            yt.append(`<div class="channel-item" data-index="${index}">${name}</div>`);
+          }
+        });
+
+        const lastIndex = parseInt(localStorage.getItem('lastPlayedIndex'));
+        if (!isNaN(lastIndex)) playChannel(lastIndex);
+        else playChannel(0);
+      })
+      .catch(() => {
+        showOverlay("❌ Failed to load channels.json");
+      });
 
     $('#channel-panel').on('click', '.channel-item', function () {
       const index = parseInt($(this).data('index'));
