@@ -790,7 +790,7 @@
         {
             "name": "Mav Select USA",
             "type": "iptv",
-            "stream_url": https://d3h07n6l1exhds.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-0z2yyo4dxctc7/fbeaa9d2-d765-4c0c-8050-f62feb7453d6/4.m3u8,
+            "stream_url": "https://d3h07n6l1exhds.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-0z2yyo4dxctc7/fbeaa9d2-d765-4c0c-8050-f62feb7453d6/4.m3u8",
             "youtube_channel_id": null
         },
         {
