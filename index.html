@@ -313,11 +313,11 @@
     });
   });
 
-  window.onload = () => {
-    showOverlay("📡 Loading channels...");
-    loadChannels();
-    resetIdleTimer();
-  };
+ window.onload = () => {
+  showOverlay("📡 Loading channels...");
+  load();  // ✅ Correct function name
+  resetIdleTimer();
+};
   document.getElementById('fullscreen-prompt').addEventListener('click', () => {
   const elem = document.documentElement;
 
