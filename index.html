@@ -140,7 +140,7 @@ function playYouTube(name, channelId) {
 }
 
 function loadChannels() {
-  fetch('channels.json')
+  fetch('./channels.json')
     .then(res => res.json())
     .then(data => {
       if (!Array.isArray(data.channels)) throw new Error("Invalid format");
