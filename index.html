@@ -239,7 +239,7 @@
   }
 
   function load() {
-    fetch('/channels.json')
+    fetch('./channels.json')
       .then(response => response.json())
       .then(data => {
         const iptv = $('#iptv-list').empty();
