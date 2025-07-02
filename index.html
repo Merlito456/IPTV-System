@@ -9,136 +9,130 @@
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     html, body {
-      margin: 0; padding: 0; height: 100%; width: 100%;
+      margin: 0; padding: 0; height: 100%;
       background: #000; font-family: sans-serif; overflow: hidden;
     }
+    .tv-container {
+      display: flex; height: 100vh; position: relative;
+    }
     #video-area {
+      flex: 1; background: #000;
+      display: flex; align-items: center; justify-content: center;
       position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      background: #000;
     }
     video, iframe {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+      width: 100%; height: 100%; object-fit: contain;
+    }
+    #overlay {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 24px;
+      background: rgba(0, 0, 0, 0.5);
     }
     #channel-panel {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 300px;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      color: #fff;
-      overflow-y: auto;
+      top: 0; left: 0;
+      width: 300px; height: 100%;
+      display: flex; flex-direction: column;
+      background: rgba(0,0,0,0.9); color: #fff;
       z-index: 100;
-      transition: opacity 0.3s ease;
-    }
-    #channel-panel.hidden {
-      opacity: 0;
-      pointer-events: none;
+      transition: all 0.3s ease;
     }
     .section-header {
-      padding: 10px;
-      background: #222;
-      font-weight: bold;
-      cursor: pointer;
-      border-bottom: 1px solid #333;
+      padding: 10px; background: #222;
+      font-weight: bold; cursor: pointer; border-bottom: 1px solid #333;
     }
     .section-content {
-      display: none;
-      flex-direction: column;
+      flex: 1; overflow-y: auto; display: none; flex-direction: column;
     }
     .section-content.expanded {
       display: flex;
     }
     .channel-item {
-      padding: 10px;
-      border-bottom: 1px solid #333;
-      cursor: pointer;
+      padding: 10px; border-bottom: 1px solid #333; cursor: pointer;
     }
     .channel-item:hover {
       background: #333;
     }
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 101;
+    }
+    .btn {
+      background: rgba(0, 0, 0, 0.7); color: #fff;
+      padding: 10px 15px; border: none; border-radius: 5px;
+      cursor: pointer;
+    }
     #channel-info {
       position: absolute;
       top: 10px;
-      left: 310px;
+      left: 60px;
       color: #00FF00;
       font-size: 20px;
       background: rgba(0, 0, 0, 0.7);
       padding: 8px 15px;
       border-radius: 8px;
-      z-index: 10;
+      z-index: 101;
       font-family: 'Share Tech Mono', monospace;
       letter-spacing: 1px;
       box-shadow: 0 0 10px #00ff00;
     }
-    #overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 24px;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 50;
-    }
-    #nav-buttons, #scroll-buttons {
+    #nav-buttons {
       position: absolute;
       bottom: 10px;
+      right: 10px;
       z-index: 101;
     }
-    #nav-buttons {
-      right: 10px;
+    #nav-buttons .btn {
+      margin-left: 10px;
+      font-size: 18px;
+      padding: 10px 20px;
     }
     #scroll-buttons {
-      left: 310px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-    }
-    .btn {
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
+      background: rgba(0,0,0,0.7);
     }
   </style>
 </head>
 <body>
 
-<div id="video-area">
-  <div id="overlay">📡 Choose Channel to play</div>
-  <div id="channel-info">Waiting for channel...</div>
+<div class="tv-container">
+  <div id="video-area">
+    <div id="overlay">📡 Choose Channel to play</div>
+    <div id="channel-info">Waiting for channel...</div>
+  </div>
 
   <div id="channel-panel">
     <div class="section-header" data-target="iptv-list">📺 IPTV Channels</div>
     <div id="iptv-list" class="section-content expanded"></div>
     <div class="section-header" data-target="youtube-list">🎥 YouTube Live Channels</div>
     <div id="youtube-list" class="section-content"></div>
+    <div id="scroll-buttons">
+      <button class="btn" id="scroll-up">⬆ Scroll Up</button>
+      <button class="btn" id="scroll-down">⬇ Scroll Down</button>
+    </div>
   </div>
+</div>
 
-  <div id="nav-buttons">
-    <button class="btn" id="prev-channel">⏮ Prev</button>
-    <button class="btn" id="next-channel">⏭ Next</button>
-  </div>
+<div id="controls">
+  <button class="btn" id="toggle-panel">☰</button>
+</div>
 
-  <div id="scroll-buttons">
-    <button class="btn" id="scroll-up">⬆ Scroll Up</button>
-    <button class="btn" id="scroll-down">⬇ Scroll Down</button>
-  </div>
+<div id="nav-buttons">
+  <button class="btn" id="prev-channel">⏮ Prev</button>
+  <button class="btn" id="next-channel">⏭ Next</button>
 </div>
 
 <script>
   let hls = null;
   let channelList = [];
   let currentIndex = -1;
-  let hideTimeout;
 
   function updateChannelInfo(name) {
     const now = new Date();
@@ -167,7 +161,7 @@
     if (index < 0 || index >= channelList.length) return;
     const ch = channelList[index];
     currentIndex = index;
-    localStorage.setItem('lastPlayedIndex', index);
+    localStorage.setItem('lastPlayedIndex', currentIndex);
 
     if (ch.type === 'iptv') {
       playIPTV(ch.name, ch.stream_url);
@@ -177,8 +171,7 @@
   }
 
   function playIPTV(name, url) {
-    clearVideo();
-    showOverlay("📡 Loading...");
+    clearVideo(); showOverlay("📡 Loading...");
     const video = $('<video autoplay controls playsinline></video>').appendTo('#video-area');
     if (Hls.isSupported()) {
       hls = new Hls();
@@ -207,9 +200,12 @@
   }
 
   function playYouTube(name, channelId) {
-    clearVideo();
-    showOverlay("📡 Loading YouTube...");
-    $(`<iframe src="https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=0" allow="autoplay; encrypted-media" allowfullscreen frameborder="0"></iframe>`).appendTo('#video-area');
+    clearVideo(); showOverlay("📡 Loading YouTube...");
+    const iframe = $(`<iframe
+      src="https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&playsinline=1"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+      frameborder="0"></iframe>`).appendTo('#video-area');
     hideOverlay();
     updateChannelInfo(name);
   }
@@ -220,9 +216,9 @@
       .then(data => {
         const iptv = $('#iptv-list').empty();
         const yt = $('#youtube-list').empty();
+        channelList = [];
 
         if (Array.isArray(data.channels)) {
-          channelList = [];
           data.channels.forEach((ch, i) => {
             const name = ch.name || "Unnamed Channel";
             if (ch.stream_url) {
@@ -234,14 +230,17 @@
             }
           });
 
+          // Auto-play previously played
           const lastIndex = parseInt(localStorage.getItem('lastPlayedIndex'));
           if (!isNaN(lastIndex)) playChannel(lastIndex);
-          else if (channelList.length > 0) playChannel(0);
+          else playChannel(0); // Auto-play first channel
         } else {
           showOverlay("❌ Invalid JSON format");
         }
       })
-      .catch(() => showOverlay("❌ Failed to load channels"));
+      .catch(() => {
+        showOverlay("❌ Failed to load channels");
+      });
   }
 
   $('#channel-panel').on('click', '.channel-item', function () {
@@ -253,37 +252,20 @@
     $('#' + $(this).data('target')).toggleClass('expanded');
   });
 
+  $('#toggle-panel').click(() => $('#channel-panel').toggleClass('hidden'));
   $('#prev-channel').click(() => playChannel(currentIndex - 1));
   $('#next-channel').click(() => playChannel(currentIndex + 1));
 
   $('#scroll-up').click(() => {
-    $('#channel-panel')[0].scrollTop -= 100;
+    $('#channel-panel .section-content.expanded').scrollTop(function(i, val){ return val - 100; });
   });
-
   $('#scroll-down').click(() => {
-    $('#channel-panel')[0].scrollTop += 100;
+    $('#channel-panel .section-content.expanded').scrollTop(function(i, val){ return val + 100; });
   });
-
-  function showPanelTemporarily() {
-    $('#channel-panel').removeClass('hidden');
-    clearTimeout(hideTimeout);
-    hideTimeout = setTimeout(() => {
-      $('#channel-panel').addClass('hidden');
-    }, 5000);
-  }
-
-  function initAutoHideListeners() {
-    const events = ['mousemove', 'keydown', 'mousedown', 'touchstart'];
-    events.forEach(event => {
-      document.addEventListener(event, showPanelTemporarily);
-    });
-    showPanelTemporarily();
-  }
 
   window.onload = () => {
     showOverlay("📡 Loading channels...");
     loadChannels();
-    initAutoHideListeners();
   };
 </script>
 
