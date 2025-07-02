@@ -37,7 +37,7 @@
       display: flex; flex-direction: column;
       background: rgba(0,0,0,0.9); color: #fff;
       z-index: 100;
-      transition: all 0.3s ease;
+      transition: transform 0.4s ease;
     }
     .section-header {
       padding: 10px; background: #222;
@@ -97,6 +97,19 @@
       flex-direction: column;
       gap: 10px;
       background: rgba(0,0,0,0.7);
+      transition: opacity 0.5s ease;
+    }
+
+    .hidden-panel {
+      transform: translateX(-100%);
+    }
+    .hidden-scroll-buttons {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .visible-scroll-buttons {
+      opacity: 1;
+      pointer-events: auto;
     }
   </style>
 </head>
@@ -113,7 +126,7 @@
     <div id="iptv-list" class="section-content expanded"></div>
     <div class="section-header" data-target="youtube-list">🎥 YouTube Live Channels</div>
     <div id="youtube-list" class="section-content"></div>
-    <div id="scroll-buttons">
+    <div id="scroll-buttons" class="visible-scroll-buttons">
       <button class="btn" id="scroll-up">⬆ Scroll Up</button>
       <button class="btn" id="scroll-down">⬇ Scroll Down</button>
     </div>
@@ -133,6 +146,8 @@
   let hls = null;
   let channelList = [];
   let currentIndex = -1;
+  let idleTimeout;
+  const idleDelay = 3000;
 
   function updateChannelInfo(name) {
     const now = new Date();
@@ -230,10 +245,9 @@
             }
           });
 
-          // Auto-play previously played
           const lastIndex = parseInt(localStorage.getItem('lastPlayedIndex'));
           if (!isNaN(lastIndex)) playChannel(lastIndex);
-          else playChannel(0); // Auto-play first channel
+          else playChannel(0);
         } else {
           showOverlay("❌ Invalid JSON format");
         }
@@ -242,6 +256,24 @@
         showOverlay("❌ Failed to load channels");
       });
   }
+
+  function showUI() {
+    $('#channel-panel').removeClass('hidden-panel');
+    $('#scroll-buttons').removeClass('hidden-scroll-buttons').addClass('visible-scroll-buttons');
+  }
+
+  function hideUI() {
+    $('#channel-panel').addClass('hidden-panel');
+    $('#scroll-buttons').removeClass('visible-scroll-buttons').addClass('hidden-scroll-buttons');
+  }
+
+  function resetIdleTimer() {
+    showUI();
+    clearTimeout(idleTimeout);
+    idleTimeout = setTimeout(hideUI, idleDelay);
+  }
+
+  $(document).on('mousemove touchstart keydown', resetIdleTimer);
 
   $('#channel-panel').on('click', '.channel-item', function () {
     const index = parseInt($(this).data('index'));
@@ -252,20 +284,26 @@
     $('#' + $(this).data('target')).toggleClass('expanded');
   });
 
-  $('#toggle-panel').click(() => $('#channel-panel').toggleClass('hidden'));
+  $('#toggle-panel').click(() => $('#channel-panel').toggleClass('hidden-panel'));
   $('#prev-channel').click(() => playChannel(currentIndex - 1));
   $('#next-channel').click(() => playChannel(currentIndex + 1));
 
   $('#scroll-up').click(() => {
-    $('#channel-panel .section-content.expanded').scrollTop(function(i, val){ return val - 100; });
+    $('#channel-panel .section-content.expanded').each(function () {
+      $(this).scrollTop($(this).scrollTop() - 100);
+    });
   });
+
   $('#scroll-down').click(() => {
-    $('#channel-panel .section-content.expanded').scrollTop(function(i, val){ return val + 100; });
+    $('#channel-panel .section-content.expanded').each(function () {
+      $(this).scrollTop($(this).scrollTop() + 100);
+    });
   });
 
   window.onload = () => {
     showOverlay("📡 Loading channels...");
     loadChannels();
+    resetIdleTimer();
   };
 </script>
 
