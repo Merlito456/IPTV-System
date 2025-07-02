@@ -238,8 +238,8 @@
     updateChannelInfo(name);
   }
 
-  function loadChannels() {
-    fetch('./channels.json')
+  function load() {
+    fetch('/channels.json')
       .then(response => response.json())
       .then(data => {
         const iptv = $('#iptv-list').empty();
