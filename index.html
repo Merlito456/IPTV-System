@@ -177,7 +177,7 @@
 
   function playIPTV(name, url) {
     clearVideo(); showOverlay("📡 Loading...");
-    const video = $('<video autoplay controls muted playsinline></video>').appendTo('#video-area');
+    const video = $('<video autoplay controls playsinline></video>').appendTo('#video-area');
     if (Hls.isSupported()) {
       hls = new Hls();
       hls.loadSource(url);
