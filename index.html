@@ -119,6 +119,14 @@
 </head>
 <body>
 
+<div id="fullscreen-prompt" style="
+  position: fixed; z-index: 9999; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.9); color: white; display: flex;
+  justify-content: center; align-items: center; font-size: 24px;
+  cursor: pointer;">
+  🔲 Click anywhere to enter Fullscreen Mode
+</div>
+
 <div class="tv-container">
   <div id="video-area">
     <div id="overlay">📡 Choose Channel to play</div>
@@ -310,6 +318,20 @@
     loadChannels();
     resetIdleTimer();
   };
+  document.getElementById('fullscreen-prompt').addEventListener('click', () => {
+  const elem = document.documentElement;
+
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+
+  document.getElementById('fullscreen-prompt').style.display = 'none';
+});
+
 </script>
 
 </body>
