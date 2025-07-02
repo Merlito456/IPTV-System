@@ -32,7 +32,6 @@
     }
     #channel-panel {
       width: 300px; background: #111; color: #fff; overflow-y: auto;
-      position: relative;
     }
     .section-header {
       padding: 10px; background: #222;
@@ -87,24 +86,21 @@
       padding: 10px 20px;
     }
     #scroll-buttons {
-      position: absolute;
+      position: fixed;
+      right: 310px;
       bottom: 80px;
-      right: 10px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      z-index: 10;
+      z-index: 1000;
     }
     .scroll-btn {
-      background: #222;
-      color: #0f0;
-      border: 1px solid #0f0;
-      padding: 5px 10px;
+      background: rgba(0, 0, 0, 0.7); color: #fff;
+      padding: 8px 12px;
       font-size: 20px;
-      cursor: pointer;
-      font-family: 'Share Tech Mono', monospace;
+      border: none;
       border-radius: 5px;
-      box-shadow: 0 0 5px #00ff00;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -115,16 +111,18 @@
     <div id="overlay">📡 Choose Channel to play</div>
     <div id="channel-info">Waiting for channel...</div>
   </div>
+
   <div id="channel-panel">
     <div class="section-header" data-target="iptv-list">📺 IPTV Channels</div>
     <div id="iptv-list" class="section-content expanded"></div>
     <div class="section-header" data-target="youtube-list">🎥 YouTube Live Channels</div>
     <div id="youtube-list" class="section-content"></div>
-    <div id="scroll-buttons">
-      <button class="scroll-btn" id="scroll-up">⬆</button>
-      <button class="scroll-btn" id="scroll-down">⬇</button>
-    </div>
   </div>
+</div>
+
+<div id="scroll-buttons">
+  <button class="scroll-btn" id="scroll-up">⬆</button>
+  <button class="scroll-btn" id="scroll-down">⬇</button>
 </div>
 
 <div id="controls">
@@ -168,7 +166,8 @@
     if (index < 0 || index >= channelList.length) return;
     const ch = channelList[index];
     currentIndex = index;
-    localStorage.setItem("lastPlayedChannel", currentIndex);
+    localStorage.setItem('lastChannelIndex', index);
+
     if (ch.type === 'iptv') {
       playIPTV(ch.name, ch.stream_url);
     } else {
@@ -202,10 +201,10 @@
   function playYouTube(name, channelId) {
     clearVideo(); showOverlay("📡 Loading YouTube...");
     const iframe = $(`<iframe
-        src="https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-        frameborder="0"></iframe>`).appendTo('#video-area');
+      src="https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+      frameborder="0"></iframe>`).appendTo('#video-area');
     hideOverlay();
     updateChannelInfo(name);
   }
@@ -219,7 +218,7 @@
 
         if (Array.isArray(data.channels)) {
           channelList = [];
-          data.channels.forEach((ch) => {
+          data.channels.forEach((ch, i) => {
             const name = ch.name || "Unnamed Channel";
             if (ch.stream_url) {
               channelList.push({ type: 'iptv', name, stream_url: ch.stream_url });
@@ -230,7 +229,8 @@
             }
           });
 
-          const lastIndex = parseInt(localStorage.getItem("lastPlayedChannel"));
+          // Auto-play last channel
+          const lastIndex = parseInt(localStorage.getItem('lastChannelIndex'));
           if (!isNaN(lastIndex)) playChannel(lastIndex);
         } else {
           showOverlay("❌ Invalid JSON format");
@@ -253,13 +253,13 @@
   $('#toggle-panel').click(() => $('#channel-panel').toggleClass('hidden'));
   $('#prev-channel').click(() => playChannel(currentIndex - 1));
   $('#next-channel').click(() => playChannel(currentIndex + 1));
+
   $('#scroll-up').click(() => {
-    const panel = $('#channel-panel');
-    panel.scrollTop(panel.scrollTop() - 100);
+    $('#channel-panel').scrollTop($('#channel-panel').scrollTop() - 100);
   });
+
   $('#scroll-down').click(() => {
-    const panel = $('#channel-panel');
-    panel.scrollTop(panel.scrollTop() + 100);
+    $('#channel-panel').scrollTop($('#channel-panel').scrollTop() + 100);
   });
 
   window.onload = () => {
