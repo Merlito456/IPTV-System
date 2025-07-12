@@ -69,6 +69,11 @@
       padding: 10px 15px; border: none; border-radius: 5px;
       cursor: pointer; margin-left: 10px;
     }
+
+    /* Added for fullscreen toggle button */
+    #fullscreen-toggle.btn {
+      display: none; /* Hidden by default, shown when not in fullscreen */
+    }
   </style>
 </head>
 <body>
@@ -89,6 +94,7 @@
   <div id="nav-buttons">
     <button class="btn" id="prev-channel">⏮ Prev</button>
     <button class="btn" id="next-channel">⏭ Next</button>
+    <button class="btn" id="fullscreen-toggle">⛶ Fullscreen</button>
   </div>
 </div>
 
@@ -98,6 +104,7 @@ let channelList = [];
 let currentIndex = -1;
 let idleTimer = null;
 const idleDelay = 5000; // 5 seconds
+let isFullscreen = false;
 
 function updateChannelInfo(name) {
   const now = new Date();
@@ -117,6 +124,39 @@ function clearVideo() {
   $('#video-area').find('video, iframe').remove();
 }
 
+function enterFullscreen() {
+  const element = document.querySelector('.tv-container');
+  const requestFullscreen = element.requestFullscreen || element.webkitRequestFullscreen || element.mozRequestFullScreen || element.msRequestFullscreen;
+  if (requestFullscreen) {
+    requestFullscreen.call(element).then(() => {
+      isFullscreen = true;
+      $('#fullscreen-toggle').hide();
+    }).catch(err => {
+      console.error('Fullscreen request failed:', err);
+    });
+  }
+}
+
+function exitFullscreen() {
+  const exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+  if (exitFullscreen) {
+    exitFullscreen.call(document).then(() => {
+      isFullscreen = false;
+      $('#fullscreen-toggle').show();
+    }).catch(err => {
+      console.error('Exit fullscreen failed:', err);
+    });
+  }
+}
+
+function toggleFullscreen() {
+  if (!isFullscreen) {
+    enterFullscreen();
+  } else {
+    exitFullscreen();
+  }
+}
+
 function playChannel(index) {
   if (index < 0 || index >= channelList.length) return;
   const ch = channelList[index];
@@ -127,6 +167,10 @@ function playChannel(index) {
     playIPTV(ch.name, ch.stream_url);
   } else if (ch.type === 'youtube' && ch.youtube_channel_id) {
     playYouTube(ch.name, ch.youtube_channel_id);
+  }
+  // Ensure fullscreen after channel change
+  if (!isFullscreen) {
+    enterFullscreen();
   }
 }
 
@@ -141,6 +185,7 @@ function playIPTV(name, url) {
       video[0].muted = false;
       video[0].play();
       hideOverlay(); updateChannelInfo(name);
+      enterFullscreen(); // Ensure fullscreen after loading
     });
   } else if (video[0].canPlayType('application/vnd.apple.mpegurl')) {
     video[0].src = url;
@@ -148,6 +193,7 @@ function playIPTV(name, url) {
       video[0].muted = false;
       video[0].play();
       hideOverlay(); updateChannelInfo(name);
+      enterFullscreen(); // Ensure fullscreen after loading
     });
   } else {
     showOverlay("❌ HLS not supported");
@@ -160,6 +206,7 @@ function playYouTube(name, channelId) {
     src="https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&playsinline=1"
     allow="autoplay; encrypted-media" allowfullscreen frameborder="0"></iframe>`).appendTo('#video-area');
   hideOverlay(); updateChannelInfo(name);
+  enterFullscreen(); // Ensure fullscreen after loading
 }
 
 function loadChannels() {
@@ -213,7 +260,22 @@ $(document).ready(() => {
   // Auto-hide triggers
   $(document).on('mousemove touchstart keydown', resetIdleTimer);
 
+  // Fullscreen event listeners
+  $(document).on('fullscreenchange webkitfullscreenchange mozfullscreenchange msfullscreenchange', () => {
+    isFullscreen = !!document.fullscreenElement || !!document.webkitFullscreenElement || !!document.mozFullScreenElement || !!document.msFullscreenElement;
+    if (!isFullscreen) {
+      $('#fullscreen-toggle').show();
+    } else {
+      $('#fullscreen-toggle').hide();
+    }
+  });
+
+  $('#fullscreen-toggle').click(toggleFullscreen);
+
   resetIdleTimer();
+
+  // Enter fullscreen on page load
+  enterFullscreen();
 
   $('#channel-panel').on('click', '.channel-item', function () {
     const index = parseInt($(this).data('index'));
